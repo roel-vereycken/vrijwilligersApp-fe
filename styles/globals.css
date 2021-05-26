@@ -1,16 +1,22 @@
-html,
-body {
-  padding: 0;
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+.profileTextField {
+  width: 50%;
+  padding-left: 50px;
 }
 
-a {
-  color: inherit;
-  text-decoration: none;
-}
-
-* {
+.profileInput {
+  background-color: whitesmoke;
+  width: 90%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
   box-sizing: border-box;
+  outline: none;
+}
+
+#wachtwoordLink {
+  text-decoration: blue underline;
+  color: blue;
+  padding-left: 50px;
 }
