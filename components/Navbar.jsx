@@ -12,7 +12,8 @@ import { Icon } from "@chakra-ui/react"
 import { FaUser, FaCalendar, FaCheck, FaInfo } from "react-icons/fa"
 import { FiLogOut } from "react-icons/fi"
 
-function Navbar() {
+function Navbar( {page} ) {
+    console.log(page)
     return (
         <nav>
            <Box bg="blue.600" pt="10%" width="100%" height="100vh" borderRight="2px solid black">
@@ -25,7 +26,7 @@ function Navbar() {
 
             <List spacing="5">
             <ListItem>
-            <Link href="/profiel"><a>
+            <Link href="/profiel" color="blue"><a>
                 <Flex>
                     <Icon 
                     as={FaUser}
@@ -36,6 +37,7 @@ function Navbar() {
                      />
                     <Text
                     fontSize="2xl"
+                    textDecoration={page === "profiel" ? "underline" : ""}
                     >Profiel</Text>
                 </Flex>
             </a></Link>
@@ -52,12 +54,15 @@ function Navbar() {
                     marginTop="8px"
                     marginX="10px"
                     />
-                    <Text fontSize="2xl">Evenementen</Text>
+                    <Text fontSize="2xl"
+                    textDecoration={page === undefined ? "underline" : ""}
+                    >Evenementen</Text>
                 </Flex>
                 </a></Link>
             </ListItem>
             
             <ListItem>
+            <Link href="/mijn-taken"><a>
             <Flex>
                     <Icon 
                     as={FaCheck}
@@ -68,8 +73,10 @@ function Navbar() {
                      />
                     <Text
                     fontSize="2xl"
+                    textDecoration={page === "taken" ? "underline" : ""}
                     >Mijn taken</Text>
                 </Flex>
+                </a></Link>
             </ListItem>
             <ListItem>
             <Flex>

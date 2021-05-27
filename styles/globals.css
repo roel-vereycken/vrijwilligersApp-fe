@@ -20,3 +20,11 @@
   color: blue;
   padding-left: 50px;
 }
+
+#eventLink {
+  transition: transform 0.5s;
+}
+
+#eventLink:hover {
+  transform: scale(1.1);
+}

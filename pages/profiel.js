@@ -1,56 +1,20 @@
 process.env["NODE_TLS_REJECT_UNAUTHORIZED"] = 0;
 
 import axios from "axios";
-import {
-  Box,
-  Center,
-  Flex,
-  FormControl,
-  FormLabel,
-  FormErrorMessage,
-  FormHelperText,
-  Input,
-  Button,
-  Text,
-} from "@chakra-ui/react";
+import { Box, Flex, Text } from "@chakra-ui/react";
 import Navbar from "../components/Navbar";
+import ProfileForm from "../components/ProfileForm";
 export default function profiel() {
   return (
     <>
       <Flex>
         <Box width="20%">
-          <Navbar />
+          <Navbar page="profiel" />
         </Box>
         <Box bgColor="gray.200" width="80%">
           <Flex>
             <Box width="50%">
-              <Flex direction="column">
-                <FormControl className="profileTextField" paddingTop="90px">
-                  <FormLabel>Voornaam</FormLabel>
-                  <input className="profileInput" type="text" />
-                </FormControl>
-                <FormControl className="profileTextField">
-                  <FormLabel>Naam</FormLabel>
-                  <input className="profileInput" type="text" />
-                </FormControl>
-                <FormControl className="profileTextField">
-                  <FormLabel>Emailadres</FormLabel>
-                  <input className="profileInput" type="text" />
-                </FormControl>
-                <FormControl className="profileTextField">
-                  <FormLabel>Telefoonnummer</FormLabel>
-                  <input className="profileInput" type="text" />
-                </FormControl>
-                <a id="wachtwoordLink">Nieuw wachtwoord aanmaken</a>
-                <Button
-                  width="140px"
-                  marginLeft="50px"
-                  bgColor="green.400"
-                  marginTop="20px"
-                >
-                  Sla wijzigingen op
-                </Button>
-              </Flex>
+              <ProfileForm />
             </Box>
             <Box
               width="50%"

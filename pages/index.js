@@ -4,6 +4,7 @@ import axios from "axios";
 import { Box, Flex } from "@chakra-ui/react";
 import Navbar from "../components/Navbar";
 import EvenementenGrid from "../components/EvenementenGrid";
+import Searchbar from "../components/Searchbar";
 
 export default function Home({ data }) {
   return (
@@ -12,7 +13,10 @@ export default function Home({ data }) {
         <Box width="20%">
           <Navbar />
         </Box>
-        <EvenementenGrid data={data} />
+        <Box bgColor="gray.200" width="80%">
+          <Searchbar data={data} />
+          <EvenementenGrid data={data} />
+        </Box>
       </Flex>
     </>
   );

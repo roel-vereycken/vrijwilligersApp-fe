@@ -21,37 +21,7 @@ import {
 function EvenementenGrid({data}) {
     return (
         <>
-        <Box bgColor="gray.200" width="80%">
-          <Box marginTop="35px" borderBottom="1px solid black" paddingBottom="15px">
-            <Flex>
-              <Menu>
-                <Heading fontSize="20px" paddingTop="7px" marginLeft="50px">
-                  Resultaten: {data.length}
-                </Heading>
-                <MenuButton
-                  as={Button}
-                  cursor={"pointer"}
-                  marginLeft="auto"
-                  marginRight="20px"
-                  border="1px solid black"
-                >
-                  Categorie
-                </MenuButton>
-                <MenuList>
-                  <MenuItem>Theater</MenuItem>
-                  <MenuItem>Film</MenuItem>
-                  <MenuItem>Muziek</MenuItem>
-                </MenuList>
-              </Menu>
-              <Input
-                placeholder="Zoeken"
-                width="20%"
-                marginRight="50px"
-                bgColor="gray.50"
-                border="1px solid black"
-              />
-            </Flex>
-          </Box>
+        <Box width="100%">
           <SimpleGrid
             height="75%"
             marginTop="25px"
@@ -62,12 +32,14 @@ function EvenementenGrid({data}) {
           >
             {data.map((evenement) => {
               return (
+                <a id="eventLink">
                 <Box
                   bg="gray.50"
                   maxHeight="245px"
                   maxWidth="340px"
                   borderRadius="7"
-                  border="1px solid grey"
+                  border="2px solid grey"
+                  boxShadow="xl"
                 >
                   <Image
                     borderTopRadius="7"
@@ -97,6 +69,7 @@ function EvenementenGrid({data}) {
                     Gezocht:
                   </Text>
                 </Box>
+                </a>
               );
             })}
           </SimpleGrid>
