@@ -10,25 +10,28 @@ export default function mijnTaken() {
         <Box width="20%">
           <Navbar page="taken" />
         </Box>
-        <Box width="80%" bgColor="gray.200">
+        <Box width="80%" bgColor="gray.200" minHeight="100vh">
           <Searchbar data={[]} />
           <Box width="100%" paddingX="45px">
             <table>
               <tr>
                 <th>Evenement</th>
                 <th>Taak</th>
+                <th>Categorie</th>
                 <th>Datum</th>
                 <th>Berichten</th>
               </tr>
               <tr>
                 <td>Jaarmarkt</td>
                 <td>Afwassen</td>
+                <td>Markt</td>
                 <td>18/05/2021</td>
                 <td>0</td>
               </tr>
               <tr>
                 <td>Jaarmarkt</td>
                 <td>Afwassen</td>
+                <td>Markt</td>
                 <td>18/05/2021</td>
                 <td>2</td>
               </tr>

@@ -1,16 +1,17 @@
 import React from "react";
 import {
   Box,
-  Checkbox,
+  Button,
   Flex,
   Heading,
-  IconButton,
   Image,
+  Input,
   SimpleGrid,
   Text,
+  Textarea,
 } from "@chakra-ui/react";
 import Navbar from "../../components/Navbar";
-import { CheckIcon } from "@chakra-ui/icons";
+import TaakKnop from "../../components/TaakKnop";
 
 export default function evenementDetail() {
   return (
@@ -19,7 +20,7 @@ export default function evenementDetail() {
         <Box width="20%">
           <Navbar />
         </Box>
-        <Box width="80%" bgColor="gray.200" paddingTop="50px">
+        <Box width="80%" bgColor="gray.200" paddingTop="50px" minHeight="100vh">
           <Box
             marginX="50px"
             borderBottom="1px solid black"
@@ -75,37 +76,93 @@ export default function evenementDetail() {
               </Box>
             </Flex>
           </Box>
-          <Box paddingLeft="50px" width="50%">
-            <Heading>Taken: </Heading>
-            <SimpleGrid columns={2}>
-              <Box>
-                <Flex>
-                  <Text
-                    border="1px solid black"
-                    borderLeftRadius="7"
-                    paddingX="10px"
-                    width="200px"
-                  >
-                    Evenement 1{" "}
+          <Flex>
+            <Box paddingLeft="50px" width="50%">
+              <Heading>Taken: </Heading>
+              <SimpleGrid columns={2} spacingX="50px" spacingY="20px">
+                <TaakKnop text="Taak 1" />
+                <TaakKnop text="Taak 2" />
+                <TaakKnop text="Taak 3" />
+                <TaakKnop text="Taak 4" />
+              </SimpleGrid>
+            </Box>
+            <Box borderLeft="1px solid black" width="50%">
+              <Heading pl="30px">Berichten</Heading>
+              <Box
+                border="1px solid black"
+                borderRadius="7"
+                width="87%"
+                height="370px"
+                overflowY="auto"
+                marginLeft="30px"
+              >
+                <Box
+                  margin="10px"
+                  border="1px solid black"
+                  borderRadius="7"
+                  padding="5px"
+                >
+                  <Text fontSize="12px">
+                    Geplaatst door: Hupeldepup Dirksen
                   </Text>
-                  <IconButton icon={<CheckIcon />}></IconButton>
-                </Flex>
-              </Box>
-              <Box paddingLeft="50px">
-                <Flex>
-                  <Text
-                    border="1px solid black"
-                    borderLeftRadius="7"
-                    paddingX="10px"
-                    width="200px"
-                  >
-                    Evenement 2{" "}
+                  <Text>
+                    TEXTTEXTTEXTTEXTTEXTTEXTTEXTTEXTTEXTTEXTTEXTTEXTTEXTTEXTTEXTTEXTTEXTTEXTTEXTTEXTTEXTTEXTTEXTTEXTTEXTTEXTTEXTTEXTTEXTTEXTTEXTTEXTTEXTTEXTTEXTTEXTTEXTTEXTTEXT
                   </Text>
-                  <IconButton icon={<CheckIcon />}></IconButton>
-                </Flex>
+                  <Text
+                    marginLeft="auto"
+                    width="90px"
+                    fontSize="12px"
+                    color="blue.900"
+                    textDecoration="underline"
+                    fontWeight="bold"
+                  >
+                    Beantwoorden
+                  </Text>
+                </Box>
+                <Box
+                  margin="10px"
+                  marginLeft="auto"
+                  border="1px solid black"
+                  borderRadius="7"
+                  padding="5px"
+                  width="80%"
+                >
+                  <Text fontSize="12px">
+                    Geplaatst door: Hupeldepup Dirksen
+                  </Text>
+                  <Text>
+                    TEXTTEXTTEXTTEXTTEXTTEXTTEXTTETTEXTTEXTTEXTTEXTTEXTTEXTTEXTTEXTTEXTTEXTTEXTTEXTTEXTTEXTTEXTTEXTTEXTTEXTTEXT
+                  </Text>
+                  <Text
+                    marginLeft="auto"
+                    width="90px"
+                    fontSize="12px"
+                    color="blue.900"
+                    textDecoration="underline"
+                    fontWeight="bold"
+                  >
+                    Beantwoorden
+                  </Text>
+                </Box>
+                <Box>
+                  <Textarea
+                    id="berichtInput"
+                    placeholder="Schrijf zelf een bericht"
+                  />
+                  <Button
+                    marginLeft="auto"
+                    marginRight="10px"
+                    colorScheme="teal"
+                    marginBottom="10px"
+                    width="90px"
+                    display="block"
+                  >
+                    Verzend
+                  </Button>
+                </Box>
               </Box>
-            </SimpleGrid>
-          </Box>
+            </Box>
+          </Flex>
         </Box>
       </Flex>
     </div>

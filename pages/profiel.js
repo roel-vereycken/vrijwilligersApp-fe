@@ -11,7 +11,7 @@ export default function profiel() {
         <Box width="20%">
           <Navbar page="profiel" />
         </Box>
-        <Box bgColor="gray.200" width="80%">
+        <Box bgColor="gray.200" width="80%" minHeight="100vh">
           <Flex>
             <Box width="50%">
               <ProfileForm />

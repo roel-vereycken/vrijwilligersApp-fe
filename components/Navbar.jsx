@@ -15,8 +15,8 @@ import { FiLogOut } from "react-icons/fi"
 function Navbar( {page} ) {
     console.log(page)
     return (
-        <nav>
-           <Box bg="blue.600" pt="10%" width="100%" height="100vh" borderRight="2px solid black">
+        <nav id="navBar">
+           <Box bg="blue.600" pt="10%" width="110%" height="100vh" borderRight="2px solid black">
             <Heading
             marginTop="15px"
             marginLeft="10px"
