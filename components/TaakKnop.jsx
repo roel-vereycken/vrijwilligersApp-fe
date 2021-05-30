@@ -11,9 +11,11 @@ function TaakKnop( {text} ) {
     return (
         <div>
             <Box>
-                  <Flex>
+                  <Flex  maxHeight="200px">
                     <Text
-                      paddingTop="5px"
+                      height="100%"
+                      paddingTop="2px"
+                      paddingBottom="3px"
                       border="1px solid black"
                       borderLeftRadius="7"
                       borderRight="none"
@@ -23,6 +25,7 @@ function TaakKnop( {text} ) {
                       {text}
                     </Text>
                     <IconButton
+                      height="auto"
                       borderLeftRadius="none"
                       border="1px solid black"
                       colorScheme="teal"

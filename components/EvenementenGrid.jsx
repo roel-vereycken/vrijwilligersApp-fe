@@ -19,6 +19,7 @@ import {
   import { ChevronLeftIcon, ChevronRightIcon } from "@chakra-ui/icons";
 
 function EvenementenGrid({data}) {
+  console.log(data)
     return (
         <>
         <Box width="100%">
@@ -30,7 +31,7 @@ function EvenementenGrid({data}) {
             spacingX="50px"
             spacingY="50px"
           >
-            {data.map((evenement) => {
+            {data["hydra:member"].map((evenement) => {
               return (
                 <a id="eventLink">
                 <Box
@@ -74,7 +75,7 @@ function EvenementenGrid({data}) {
             })}
           </SimpleGrid>
           <Center>
-            <Box marginTop="20px">
+            <Box marginTop="35px">
               <IconButton
                 height="30px"
                 width="30px"

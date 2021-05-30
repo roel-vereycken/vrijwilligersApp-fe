@@ -16,11 +16,11 @@ import {
 function Searchbar( {data} ) {
     return (
         <div>
-            <Box marginTop="20px" borderBottom="1px solid black" paddingBottom="20px">
+            <Box paddingTop="20px" borderBottom="1px solid black" paddingBottom="20px" bgColor="green.300">
             <Flex>
               <Menu>
                 <Heading fontSize="20px" paddingTop="7px" marginLeft="50px">
-                  Resultaten: {data.length}
+                  Resultaten: {data["hydra:totalItems"]}
                 </Heading>
                 <MenuButton
                   as={Button}

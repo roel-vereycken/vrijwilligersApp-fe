@@ -7,6 +7,7 @@ import EvenementenGrid from "../components/EvenementenGrid";
 import Searchbar from "../components/Searchbar";
 
 export default function Home({ data }) {
+  console.log(data["hydra:view"]);
   return (
     <>
       <Flex>
@@ -23,7 +24,7 @@ export default function Home({ data }) {
 }
 
 export async function getServerSideProps() {
-  const resp = await axios.get("https://127.0.0.1:8000/api/events.json");
+  const resp = await axios.get("https://127.0.0.1:8000/api/events.jsonld");
   const data = resp.data;
   return {
     props: {
