@@ -16,7 +16,7 @@ import {
 function Searchbar( {data} ) {
     return (
         <div>
-            <Box paddingTop="20px" borderBottom="1px solid black" paddingBottom="20px" bgColor="green.300">
+            <Box paddingTop="20px" borderBottom="1px solid black" paddingBottom="20px" bgColor="blue.300">
             <Flex>
               <Menu>
                 <Heading fontSize="20px" paddingTop="7px" marginLeft="50px">

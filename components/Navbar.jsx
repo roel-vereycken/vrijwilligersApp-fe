@@ -16,7 +16,7 @@ function Navbar( {page} ) {
     console.log(page)
     return (
         <nav id="navBar">
-           <Box bg="blue.600" pt="10%" width="110%" height="100vh" borderRight="2px solid black">
+           <Box bg="blue.600" pt="10%" width="100%" height="100vh" borderRight="2px solid black">
             <Heading
             marginTop="15px"
             marginLeft="10px"
@@ -45,7 +45,7 @@ function Navbar( {page} ) {
 
             
             <ListItem>
-            <Link href="/"><a>
+            <Link href="/evenementen/1"><a>
                 <Flex>
                     <Icon 
                     as={FaCalendar}

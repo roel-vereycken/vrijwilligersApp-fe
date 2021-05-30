@@ -6,31 +6,11 @@ import axios from "axios";
 import { Box, Flex, IconButton, Button, Center } from "@chakra-ui/react";
 import { ChevronLeftIcon, ChevronRightIcon } from "@chakra-ui/icons";
 
-import Navbar from "../components/Navbar";
-import EvenementenGrid from "../components/EvenementenGrid";
-import Searchbar from "../components/Searchbar";
+import Navbar from "../../components/Navbar";
+import EvenementenGrid from "../../components/EvenementenGrid";
+import Searchbar from "../../components/Searchbar";
 
-export default function Home({ data }) {
-  // console.log(data["hydra:view"]);
-
-  // const [currentPage, setCurrentPage] = useState(1);
-  // const [pageNumber, setPageNumber] = useState(1);
-  // const [pageNumberArray, setPageNumberArray] = useState([]);
-  // const [data, setData] = useState([]);
-
-  // useEffect(async () => {
-  //   const resp = await axios.get(
-  //     `https://127.0.0.1:8000/api/events.jsonld?page=${currentPage}`
-  //   );
-  //   setData(resp.data);
-
-  // }, []);
-
-  // const handlepageNumberClick = (e) => {
-  //   console.log(e.target.id);
-  //   setCurrentPage(e.target.id);
-  // };
-
+export default function Home({ data, page }) {
   console.log("data?", data["hydra:member"]);
   const pageNumber = Math.ceil(data["hydra:totalItems"] / 6);
   const pageNumberArray = [...Array(pageNumber).keys()].map((page) => page + 1);
@@ -47,15 +27,21 @@ export default function Home({ data }) {
 
           <Center>
             <Box marginTop="35px">
-              <IconButton
-                height="30px"
-                width="30px"
-                icon={<ChevronLeftIcon />}
-                border="1px solid grey"
-              />
+              {pageNumber - Number(page) === 0 && (
+                <Link href={`/evenementen/${Number(page) - 1}`}>
+                  <IconButton
+                    height="30px"
+                    width="30px"
+                    icon={<ChevronLeftIcon />}
+                    border="1px solid grey"
+                  />
+                </Link>
+              )}
+              {console.log("page", page)}
               {pageNumberArray.map((pagenr) => (
-                <Link href="/">
+                <Link href={`/evenementen/${pagenr}`}>
                   <Button
+                    bgColor={Number(page) === pagenr ? "yellow" : ""}
                     key={pagenr}
                     id={pagenr}
                     height="30px"
@@ -68,13 +54,17 @@ export default function Home({ data }) {
                 </Link>
               ))}
 
-              <IconButton
-                marginLeft="10px"
-                height="30px"
-                width="30px"
-                icon={<ChevronRightIcon />}
-                border="1px solid grey"
-              />
+              {pageNumber - Number(page) > 0 && (
+                <Link href={`/evenementen/${Number(page) + 1}`}>
+                  <IconButton
+                    marginLeft="10px"
+                    height="30px"
+                    width="30px"
+                    icon={<ChevronRightIcon />}
+                    border="1px solid grey"
+                  />
+                </Link>
+              )}
             </Box>
           </Center>
         </Box>
@@ -83,11 +73,15 @@ export default function Home({ data }) {
   );
 }
 
-export async function getServerSideProps() {
-  const resp = await axios.get("https://127.0.0.1:8000/api/events.jsonld");
+export async function getServerSideProps(context) {
+  const { page } = context.query;
+  const resp = await axios.get(
+    `https://127.0.0.1:8000/api/events.jsonld?page=${page}`
+  );
   const data = resp.data;
   return {
     props: {
+      page,
       data,
     },
   };

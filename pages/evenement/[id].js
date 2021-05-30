@@ -22,7 +22,7 @@ export default function evenementDetail() {
                 borderRadius="7"
                 width="550px"
                 height="260px"
-                fallbackSrc="https://dummyimage.com/320x150/000/fff"
+                fallbackSrc="https://dummyimage.com/550x260/000/fff"
               />
               <Box marginLeft="40px" width="40%">
                 <Text
