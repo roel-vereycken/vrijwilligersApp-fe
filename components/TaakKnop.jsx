@@ -1,13 +1,27 @@
-import React from 'react'
+import React, { useState } from 'react'
 import {
     Box,
+    Button,
     Flex,
     IconButton,
     Text,
+    Popover,
+    PopoverTrigger,
+    PopoverContent,
+    PopoverHeader,
+    PopoverBody,
+    PopoverFooter,
+    PopoverArrow,
+    PopoverCloseButton,
   } from "@chakra-ui/react";
 import { CheckIcon } from "@chakra-ui/icons";
 
 function TaakKnop( {text} ) {
+    // const [clicked, setClicked] = useState(false)
+    // console.log("clicked", clicked)
+    // const handleClick = () => {
+    //   setClicked(!clicked)
+    // }
     return (
         <div>
             <Box>
@@ -22,8 +36,21 @@ function TaakKnop( {text} ) {
                       paddingX="10px"
                       width="200px"
                     >
-                      {text}
+                    {text}
                     </Text>
+                    {/* <Popover >
+                      <PopoverTrigger>
+                        <Button onClick={handleClick}>Trigger</Button>
+                      </PopoverTrigger>
+                      {clicked && (
+                      <PopoverContent >
+                        <PopoverArrow />
+                        <PopoverCloseButton />
+                        <PopoverHeader>Confirmation!</PopoverHeader>
+                        <PopoverBody>Are you sure you want to have that milkshake?</PopoverBody>
+                      </PopoverContent>)
+                      }
+                    </Popover> */}
                     <IconButton
                       height="auto"
                       borderLeftRadius="none"

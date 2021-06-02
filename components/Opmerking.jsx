@@ -3,8 +3,9 @@ import {
     Box,
     Text,
   } from "@chakra-ui/react";
+
   
-function Opmerking() {
+function Opmerking({text, userName, userFirstName}) {
     return (
         <div>
             <Box
@@ -16,10 +17,10 @@ function Opmerking() {
                   width="80%"
                 >
                   <Text fontSize="12px">
-                    Geplaatst door: Hupeldepup Dirksen
+                    Geplaatst door: {userFirstName} {userName}
                   </Text>
                   <Text>
-                    TEXTTEXTTEXTTEXTTEXTTEXTTEXTTETTEXTTEXTTEXTTEXTTEXTTEXTTEXTTEXTTEXTTEXTTEXTTEXTTEXTTEXTTEXTTEXTTEXTTEXTTEXT
+                    {text}
                   </Text>
                   <Text
                     marginLeft="auto"

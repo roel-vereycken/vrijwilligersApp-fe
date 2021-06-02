@@ -26,7 +26,7 @@ function EvenementenGrid({data}) {
           >
             {data.map((evenement) => {
               return (
-                <Link href="/evenement/1">
+                <Link href={`/evenement/${evenement.id}`}>
                 <a id="eventLink">
                 <Box
                   bg="gray.50"

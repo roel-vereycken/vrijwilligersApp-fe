@@ -1,20 +1,17 @@
 process.env["NODE_TLS_REJECT_UNAUTHORIZED"] = 0;
-import React, { useState, useEffect } from "react";
-import Link from "next/link";
 
 import axios from "axios";
-import { Box, Flex, IconButton, Button, Center } from "@chakra-ui/react";
-import { ChevronLeftIcon, ChevronRightIcon } from "@chakra-ui/icons";
+import { Box, Flex, Center } from "@chakra-ui/react";
 
 import Navbar from "../../components/Navbar";
 import EvenementenGrid from "../../components/EvenementenGrid";
 import Searchbar from "../../components/Searchbar";
+import Pagination from "../../components/Pagination";
 
-export default function Home({ data, page }) {
-  console.log("data?", data["hydra:member"]);
+export default function Evenementen({ data, page }) {
+  //console.log("data?", data["hydra:member"]);
   const pageNumber = Math.ceil(data["hydra:totalItems"] / 6);
   const pageNumberArray = [...Array(pageNumber).keys()].map((page) => page + 1);
-
   return (
     <>
       <Flex>
@@ -26,46 +23,11 @@ export default function Home({ data, page }) {
           <EvenementenGrid data={data["hydra:member"]} />
 
           <Center>
-            <Box marginTop="35px">
-              {pageNumber - Number(page) === 0 && (
-                <Link href={`/evenementen/${Number(page) - 1}`}>
-                  <IconButton
-                    height="30px"
-                    width="30px"
-                    icon={<ChevronLeftIcon />}
-                    border="1px solid grey"
-                  />
-                </Link>
-              )}
-              {console.log("page", page)}
-              {pageNumberArray.map((pagenr) => (
-                <Link href={`/evenementen/${pagenr}`}>
-                  <Button
-                    bgColor={Number(page) === pagenr ? "yellow" : ""}
-                    key={pagenr}
-                    id={pagenr}
-                    height="30px"
-                    width="30px"
-                    marginLeft="10px"
-                    border="1px solid grey"
-                  >
-                    {pagenr}
-                  </Button>
-                </Link>
-              ))}
-
-              {pageNumber - Number(page) > 0 && (
-                <Link href={`/evenementen/${Number(page) + 1}`}>
-                  <IconButton
-                    marginLeft="10px"
-                    height="30px"
-                    width="30px"
-                    icon={<ChevronRightIcon />}
-                    border="1px solid grey"
-                  />
-                </Link>
-              )}
-            </Box>
+            <Pagination
+              page={page} //paginanummer uit en voor de api
+              pageNumber={pageNumber} //paginanummer op de button
+              pageNumberArray={pageNumberArray} //gegenereerde array om correct aantal buttons te maken
+            />
           </Center>
         </Box>
       </Flex>
