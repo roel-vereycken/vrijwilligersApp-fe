@@ -4,7 +4,8 @@ import axios from "axios";
 import { Box, Flex, Text } from "@chakra-ui/react";
 import Navbar from "../components/Navbar";
 import ProfileForm from "../components/ProfileForm";
-export default function profiel() {
+
+export default function profiel({ data }) {
   return (
     <>
       <Flex>
@@ -14,7 +15,7 @@ export default function profiel() {
         <Box bgColor="gray.200" width="80%" minHeight="100vh">
           <Flex>
             <Box width="50%">
-              <ProfileForm />
+              <ProfileForm data={data} />
             </Box>
             <Box
               width="50%"
@@ -42,4 +43,14 @@ export default function profiel() {
       </Flex>
     </>
   );
+}
+
+export async function getServerSideProps() {
+  const resp = await axios.get("https://127.0.0.1:8000/api/users/3.json");
+  const data = resp.data;
+  return {
+    props: {
+      data,
+    },
+  };
 }

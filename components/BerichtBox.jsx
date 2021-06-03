@@ -13,7 +13,7 @@ function BerichtBox( {berichten} ) {
   
     const router = useRouter()
     const { id } = router.query
-    console.log(berichten)
+    // console.log(berichten)
     const [message, setMessage] = useState("")
 
     const handleMessageSubmit = async(e) => {
@@ -32,10 +32,10 @@ function BerichtBox( {berichten} ) {
             <Box
                 border="1px solid black"
                 borderRadius="7"
-                width="87%"
+                width={["100%", "100%", "100%", "87%"]}
                 maxHeight="370px"
                 overflowY="auto"
-                marginLeft="30px"
+                marginLeft={[0, 0, 0, "30px"]}
               >
 
                 {berichten && berichten.map((bericht)=><Bericht key={bericht.id} berichtId={bericht.id} text={bericht.body} userName={bericht.userBericht.naam} userFirstName={bericht.userBericht.voornaam} comments={bericht.opmerkingen}/>)}

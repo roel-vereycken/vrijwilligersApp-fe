@@ -15,10 +15,17 @@ export default function Evenementen({ data, page }) {
   return (
     <>
       <Flex>
-        <Box width="20%">
+        <Box
+          width={["0px", "0px", "0px", "20%"]}
+          display={["none", "none", "none", "block"]}
+        >
           <Navbar />
         </Box>
-        <Box bgColor="gray.200" width="80%" minHeight="100vh">
+        <Box
+          bgColor="gray.200"
+          width={["100%", "100%", "100%", "80%"]}
+          minHeight="100vh"
+        >
           <Searchbar data={data} />
           <EvenementenGrid data={data["hydra:member"]} />
 

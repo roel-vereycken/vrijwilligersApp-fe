@@ -27,7 +27,6 @@ function Bericht({berichtId, text, userName, userFirstName, comments}) {
       })
       console.log(resp)
   }
-  console.log("comments", comments)
     return (
         <div>
             <Box

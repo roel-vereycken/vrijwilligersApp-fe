@@ -16,7 +16,7 @@ import {
   UnorderedList,
 } from "@chakra-ui/react";
 import Navbar from "../../components/Navbar";
-import TaakKnop from "../../components/TaakKnop";
+import TakenBox from "../../components/TakenBox";
 import BerichtBox from "../../components/BerichtBox";
 
 const fetcher = (url) => axios.get(url).then((res) => res.data);
@@ -34,12 +34,20 @@ export default function evenementDetail({ serverData }) {
   return (
     <div>
       <Flex>
-        <Box width="20%">
+        <Box
+          width={["0px", "0px", "0px", "20%"]}
+          display={["none", "none", "none", "block"]}
+        >
           <Navbar />
         </Box>
-        <Box width="80%" bgColor="gray.200" paddingTop="50px" minHeight="100%">
+        <Box
+          width={["100%", "100%", "100%", "80%"]}
+          bgColor="gray.200"
+          paddingTop="50px"
+          minHeight="100%"
+        >
           <Box marginX="50px" paddingBottom="15px">
-            <Flex>
+            <Flex direction={["column", "column", "row", "row"]}>
               <Image
                 borderRadius="7"
                 width="550px"
@@ -57,27 +65,21 @@ export default function evenementDetail({ serverData }) {
               </Box>
             </Flex>
           </Box>
-          <Flex>
-            <Box paddingLeft="50px" width="50%">
+          <Flex direction={["column", "column", "column", "row"]}>
+            <Box
+              marginLeft={[0, 0, 0, "50px"]}
+              paddingX={["5px", "10px", "40px", 0]}
+              width={["100%", "100%", "100%", "50%"]}
+            >
               <Heading>Taken: </Heading>
-              <Box
-                border="1px solid black"
-                borderRadius="7"
-                overflowY="auto"
-                maxHeight="370px"
-                padding="10px"
-                marginRight="10px"
-              >
-                <SimpleGrid columns={2} spacingX="50px" spacingY="20px">
-                  {serverData.eventTaken.map((taak) => {
-                    console.log("check");
-                    return <TaakKnop text={taak.taakId.naam} />;
-                  })}
-                </SimpleGrid>
-              </Box>
+              <TakenBox serverData={serverData} />
             </Box>
-            <Box width="50%">
-              <Heading pl="30px">Berichten</Heading>
+            <Box
+              paddingLeft={[0, 0, 0, "50px"]}
+              paddingX={["5px", "10px", "40px", 0]}
+              width={["100%", "100%", "100%", "50%"]}
+            >
+              <Heading pl={[0, 0, 0, "30px"]}>Berichten</Heading>
               <BerichtBox berichten={data} />
             </Box>
           </Flex>

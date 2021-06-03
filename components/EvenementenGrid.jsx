@@ -20,7 +20,7 @@ function EvenementenGrid({data}) {
             height="75%"
             marginTop="25px"
             marginX="50px"
-            columns={3}
+            columns={[0,0,2,3]}
             spacingX="50px"
             spacingY="50px"
           >

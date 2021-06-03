@@ -34,7 +34,7 @@ function TaakKnop( {text} ) {
                       borderLeftRadius="7"
                       borderRight="none"
                       paddingX="10px"
-                      width="200px"
+                      width="60%"
                     >
                     {text}
                     </Text>
