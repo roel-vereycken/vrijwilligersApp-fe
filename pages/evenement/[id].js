@@ -47,11 +47,11 @@ export default function evenementDetail({ serverData }) {
           minHeight="100%"
         >
           <Box marginX="50px" paddingBottom="15px">
-            <Flex direction={["column", "column", "row", "row"]}>
+            <Flex direction={["column", "column", "column", "row"]}>
               <Image
                 borderRadius="7"
-                width="550px"
-                height="260px"
+                width={["100%", "366px", "680px", "550px"]}
+                height={[0, "173px", "308px", "260px"]}
                 src={`http://localhost/vrijwilligersApp/public/images/afbeeldingen/${serverData.afbeelding}`}
                 fallbackSrc="https://dummyimage.com/550x260/000/fff"
               />
@@ -69,7 +69,7 @@ export default function evenementDetail({ serverData }) {
             <Box
               marginLeft={[0, 0, 0, "50px"]}
               paddingX={["5px", "10px", "40px", 0]}
-              width={["100%", "100%", "100%", "50%"]}
+              width={["100%", "100%", "100%", "47%"]}
             >
               <Heading>Taken: </Heading>
               <TakenBox serverData={serverData} />
@@ -77,7 +77,7 @@ export default function evenementDetail({ serverData }) {
             <Box
               paddingLeft={[0, 0, 0, "50px"]}
               paddingX={["5px", "10px", "40px", 0]}
-              width={["100%", "100%", "100%", "50%"]}
+              width={["100%", "100%", "100%", "53%"]}
             >
               <Heading pl={[0, 0, 0, "30px"]}>Berichten</Heading>
               <BerichtBox berichten={data} />

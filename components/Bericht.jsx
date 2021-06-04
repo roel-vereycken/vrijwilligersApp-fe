@@ -66,7 +66,6 @@ function Bericht({berichtId, text, userName, userFirstName, comments}) {
                       placeholder="Plaats een reactie"
                       value={reaction}
                       onChange={e => setReaction(e.target.value)}>
-
                     </Textarea>
                     <Button 
                       marginLeft="auto"
