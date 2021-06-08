@@ -1,7 +1,5 @@
 import React from "react";
-import { useRouter } from "next/router";
 import axios from "axios";
-import useSWR from "swr";
 import {
   Box,
   Flex,
@@ -19,18 +17,7 @@ import Navbar from "../../components/Navbar";
 import TakenBox from "../../components/TakenBox";
 import BerichtBox from "../../components/BerichtBox";
 
-const fetcher = (url) => axios.get(url).then((res) => res.data);
-
 export default function evenementDetail({ serverData }) {
-  const router = useRouter();
-  const { id } = router.query;
-
-  const { data, error, isValidating } = useSWR(
-    `https://127.0.0.1:8000/api/berichts.json?eventBericht.id=${id}`,
-    fetcher,
-    { refreshInterval: 1000 }
-  );
-
   return (
     <div>
       <Flex>
@@ -80,7 +67,7 @@ export default function evenementDetail({ serverData }) {
               width={["100%", "100%", "100%", "53%"]}
             >
               <Heading pl={[0, 0, 0, "30px"]}>Berichten</Heading>
-              <BerichtBox berichten={data} />
+              <BerichtBox />
             </Box>
           </Flex>
         </Box>

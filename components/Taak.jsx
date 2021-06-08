@@ -1,11 +1,23 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
+import axios from "axios"
 import {Box, Button, Flex, Text, List, ListItem, OrderedList, Icon } from "@chakra-ui/react";
 import { CloseIcon } from "@chakra-ui/icons";
 
 
+
 function Taak({taak}) {
+    const users = []
+    taak.users.map((user) => users.push(user["@id"]))
+    // console.log("users",users)
     const [active, setActive] = useState(false)
     const switchActive = () => setActive(!active)
+    const handleAanmeldenClick = async(e) => {
+        e.preventDefault()
+        const resp = await axios.put(`https://127.0.0.1:8000/api/event_taaks/${taak.id}`, {
+            users: [...users, "api/users/4"]
+        })
+        console.log(resp)
+    }
     return (
         <div>
            <Box 
@@ -17,7 +29,7 @@ function Taak({taak}) {
               <ListItem>Taak: {taak.taakId.naam}</ListItem>
               <ListItem>Uur star: {taak.startUur}</ListItem>
               <ListItem>Uur stop: {taak.eindUur}</ListItem>
-              <ListItem>Aantal gezocht: </ListItem>
+              <ListItem>Aantal vrijwilligers gezocht: {taak.aantalVrijwilligers - taak.users.length}</ListItem>
             </List>
             {!active && 
             <Flex >
@@ -27,7 +39,7 @@ function Taak({taak}) {
                     fontWeight="bold" 
                     color="blue.900"
                     textDecoration="underline">Details</Text>
-              <Button colorScheme="teal" marginLeft="auto" marginY="10px" width="100px">Aanmelden</Button>
+              <Button onClick={handleAanmeldenClick} colorScheme="teal" marginLeft="auto" marginY="10px" width="100px">Aanmelden</Button>
             </Flex>}
             {active && 
             <Box>
@@ -35,14 +47,16 @@ function Taak({taak}) {
                     <Box>
                         <Flex>
                             <Text>Omschrijving:</Text>
-                            <Text>{taak.taakId.omschrijving}</Text>
+                            {/* warning dangerouslySetInnerHTML: Alleen de admin kan 
+                            omschrijving toevoegen in easyadmin */}
+                            <Box dangerouslySetInnerHTML={{__html:taak.taakId.omschrijving}}></Box>
                         </Flex>
                         <Flex>
                             <Text >Voert uit:</Text>
                             <Box marginLeft="10px">
                             <OrderedList >
-                                <ListItem>Jef</ListItem>
-                                <ListItem>Jos</ListItem>
+                                {users.map((user) => <ListItem key={user.id}>{user.voornaam} {user.naam}</ListItem>)}
+                                
                             </OrderedList>
                             </Box>
                         </Flex>

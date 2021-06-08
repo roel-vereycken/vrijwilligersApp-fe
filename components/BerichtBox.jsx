@@ -1,5 +1,6 @@
 import React, {useState} from 'react'
 import { useRouter } from 'next/router'
+import useSWR from "swr";
 import {
     Box,
     Button,
@@ -8,6 +9,7 @@ import {
 import Bericht from "./Bericht";
 import axios from 'axios';
 
+const fetcher = (url) => axios.get(url).then((res) => res.data);
 
 function BerichtBox( {berichten} ) {
   
@@ -15,6 +17,13 @@ function BerichtBox( {berichten} ) {
     const { id } = router.query
     // console.log(berichten)
     const [message, setMessage] = useState("")
+
+  
+    const { data, error, isValidating } = useSWR(
+      `https://127.0.0.1:8000/api/berichts.json?eventBericht.id=${id}`,
+      fetcher,
+      { refreshInterval: 1000 }
+    );
 
     const handleMessageSubmit = async(e) => {
       e.preventDefault()
@@ -38,7 +47,7 @@ function BerichtBox( {berichten} ) {
                 marginLeft={[0, 0, 0, "30px"]}
               >
 
-                {berichten && berichten.map((bericht)=><Bericht key={bericht.id} berichtId={bericht.id} text={bericht.body} userName={bericht.userBericht.naam} userFirstName={bericht.userBericht.voornaam} comments={bericht.opmerkingen}/>)}
+                {data && data.map((bericht)=><Bericht key={bericht.id} berichtId={bericht.id} text={bericht.body} userName={bericht.userBericht.naam} userFirstName={bericht.userBericht.voornaam} comments={bericht.opmerkingen}/>)}
 
                
 

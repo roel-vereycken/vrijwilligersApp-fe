@@ -1,9 +1,11 @@
 import React from "react";
+import axios from "axios";
 import { Box, Flex } from "@chakra-ui/react";
 import Navbar from "../components/Navbar";
 import Searchbar from "../components/Searchbar";
 
-export default function mijnTaken() {
+export default function mijnTaken({ data }) {
+  console.log(data.taakverdeling);
   return (
     <div>
       <Flex>
@@ -19,26 +21,30 @@ export default function mijnTaken() {
                 <th>Taak</th>
                 <th>Categorie</th>
                 <th>Datum</th>
-                <th>Berichten</th>
               </tr>
-              <tr>
-                <td>Jaarmarkt</td>
-                <td>Afwassen</td>
-                <td>Markt</td>
-                <td>18/05/2021</td>
-                <td>0</td>
-              </tr>
-              <tr>
-                <td>Jaarmarkt</td>
-                <td>Afwassen</td>
-                <td>Markt</td>
-                <td>18/05/2021</td>
-                <td>2</td>
-              </tr>
+              {data &&
+                data.taakverdeling.map((taak) => (
+                  <tr key={taak.id}>
+                    <td>{taak.eventId.naam}</td>
+                    <td>{taak.taakId.naam}</td>
+                    <td>{taak.eventId.eventCategorie.naam}</td>
+                    <td>{taak.datum}</td>
+                  </tr>
+                ))}
             </table>
           </Box>
         </Box>
       </Flex>
     </div>
   );
+}
+
+export async function getServerSideProps() {
+  const resp = await axios.get(`https://127.0.0.1:8000/api/users/3`);
+  const data = resp.data;
+  return {
+    props: {
+      data,
+    },
+  };
 }
