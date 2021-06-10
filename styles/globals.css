@@ -40,16 +40,10 @@
   padding-left: 50px;
 }
 
-#eventLink {
+.eventLink {
   transition: transform 0.5s;
 }
 
-#eventLink:hover {
+.eventLink:hover {
   transform: scale(1.1);
 }
-
-/* @media screen and (max-width: 1050px) {
-  #navBar {
-    display: none;
-  }
-} */

@@ -10,28 +10,27 @@ import {
   } from "@chakra-ui/react";
 import Link from 'next/link'
 
-
 function EvenementenGrid({data}) {
     console.log(data)
     return (
         <>
         <Box width="100%">
+          <Center>
           <SimpleGrid
             height="75%"
             marginTop="25px"
-            marginX="50px"
-            columns={[0,0,2,3]}
+            columns={[0,0,2,2,3]}
             spacingX="50px"
             spacingY="50px"
           >
             {data.map((evenement) => {
               return (
                 <Link href={`/evenement/${evenement.id}`}>
-                <a id="eventLink">
+                <a className="eventLink">
                 <Box
                   bg="gray.50"
-                  maxHeight="245px"
-                  maxWidth="340px"
+                  height={"250px"}
+                  width={["250px", "340px", "340px", "340px"]}
                   borderRadius="7"
                   border="2px solid grey"
                   boxShadow="xl"
@@ -51,7 +50,7 @@ function EvenementenGrid({data}) {
                     marginBottom="5px"
                     borderTop="1px solid gray"
                   >
-                    {evenement.naam}
+                  {evenement.naam}
                   </Text>
                   <Center>
                     <Divider
@@ -61,14 +60,16 @@ function EvenementenGrid({data}) {
                     />
                   </Center>
                   <Text pl="15px" pt="5px" >
-                    Gezocht:
+                    Datum: {evenement.startDatum}
                   </Text>
+                  
                 </Box>
                 </a>
                 </Link>
               );
             })}
           </SimpleGrid>
+          </Center>
           
         </Box>
         </>

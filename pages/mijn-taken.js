@@ -9,10 +9,17 @@ export default function mijnTaken({ data }) {
   return (
     <div>
       <Flex>
-        <Box width="20%">
+        <Box
+          width={["0px", "0px", "0px", "20%"]}
+          display={["none", "none", "none", "block"]}
+        >
           <Navbar page="taken" />
         </Box>
-        <Box width="80%" bgColor="gray.200" minHeight="100vh">
+        <Box
+          width={["100%", "100%", "100%", "80%"]}
+          bgColor="gray.200"
+          minHeight="100vh"
+        >
           <Searchbar data={[]} />
           <Box width="100%" paddingX="45px">
             <table>
@@ -40,7 +47,7 @@ export default function mijnTaken({ data }) {
 }
 
 export async function getServerSideProps() {
-  const resp = await axios.get(`https://127.0.0.1:8000/api/users/3`);
+  const resp = await axios.get(`https://127.0.0.1:8000/api/users/4`);
   const data = resp.data;
   return {
     props: {

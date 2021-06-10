@@ -55,7 +55,8 @@ function Taak({taak}) {
                             <Text >Voert uit:</Text>
                             <Box marginLeft="10px">
                             <OrderedList >
-                                {users.map((user) => <ListItem key={user.id}>{user.voornaam} {user.naam}</ListItem>)}
+                                {console.log(taak.users)}
+                                {taak.users.map((user) => <ListItem key={user.id}>{user.voornaam} {user.naam}</ListItem>)}
                                 
                             </OrderedList>
                             </Box>

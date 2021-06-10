@@ -3,6 +3,7 @@ process.env["NODE_TLS_REJECT_UNAUTHORIZED"] = 0;
 import axios from "axios";
 import { Box, Flex, Center } from "@chakra-ui/react";
 
+import ResponsiveNavbar from "../../components/ResponsiveNavbar";
 import Navbar from "../../components/Navbar";
 import EvenementenGrid from "../../components/EvenementenGrid";
 import Searchbar from "../../components/Searchbar";
@@ -26,7 +27,12 @@ export default function Evenementen({ data, page }) {
           width={["100%", "100%", "100%", "80%"]}
           minHeight="100vh"
         >
-          <Searchbar data={data} />
+          <Box display={["block", "block", "block", "none"]}>
+            <ResponsiveNavbar />
+          </Box>
+          <Box display={["none", "none", "none", "block"]}>
+            <Searchbar data={data} />
+          </Box>
           <EvenementenGrid data={data["hydra:member"]} />
 
           <Center>

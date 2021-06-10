@@ -14,6 +14,7 @@ import {
   UnorderedList,
 } from "@chakra-ui/react";
 import Navbar from "../../components/Navbar";
+import ResponsiveNavbar from "../../components/ResponsiveNavbar";
 import TakenBox from "../../components/TakenBox";
 import BerichtBox from "../../components/BerichtBox";
 
@@ -27,12 +28,16 @@ export default function evenementDetail({ serverData }) {
         >
           <Navbar />
         </Box>
+
         <Box
           width={["100%", "100%", "100%", "80%"]}
           bgColor="gray.200"
-          paddingTop="50px"
+          paddingTop={["0px", "0px", "0px", "50px"]}
           minHeight="100%"
         >
+          <Box display={["block", "block", "block", "none"]}>
+            <ResponsiveNavbar />
+          </Box>
           <Box marginX="50px" paddingBottom="15px">
             <Flex direction={["column", "column", "column", "row"]}>
               <Image
@@ -43,12 +48,29 @@ export default function evenementDetail({ serverData }) {
                 fallbackSrc="https://dummyimage.com/550x260/000/fff"
               />
               <Box marginLeft="40px" width="40%">
-                <UnorderedList fontSize="1.25rem">
-                  <ListItem>Titel: {serverData.naam}</ListItem>
-                  <ListItem>Datum: {serverData.startDatum}</ListItem>
-                  <ListItem>Locatie</ListItem>
-                  <ListItem>Beschrijving: {serverData.beschrijving}</ListItem>
-                </UnorderedList>
+                <List fontSize="1.25rem">
+                  <ListItem>
+                    <Flex>
+                      <Text fontWeight="bold">Titel:</Text>
+                      <Text marginLeft="7px">{serverData.naam}</Text>
+                    </Flex>
+                  </ListItem>
+                  <ListItem>
+                    <Flex>
+                      <Text fontWeight="bold">Datum:</Text>
+                      <Text marginLeft="7px">{serverData.startDatum}</Text>
+                    </Flex>
+                  </ListItem>
+                  <ListItem>
+                    <Text fontWeight="bold">Locatie:</Text>
+                  </ListItem>
+                  <ListItem>
+                    <Flex>
+                      <Text fontWeight="bold">Beschrijving:</Text>
+                      <Text marginLeft="7px">{serverData.beschrijving}</Text>
+                    </Flex>
+                  </ListItem>
+                </List>
               </Box>
             </Flex>
           </Box>

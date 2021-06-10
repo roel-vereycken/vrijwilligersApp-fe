@@ -1,9 +1,8 @@
 import React from 'react'
 import {
     Box,
-
     Button,
-
+    Text,
     Flex,
     Heading,
     Input,
@@ -18,32 +17,31 @@ function Searchbar( {data} ) {
         <div>
             <Box paddingTop="20px" borderBottom="1px solid black" paddingBottom="20px" bgColor="blue.300">
             <Flex>
-              <Menu>
-                <Heading fontSize="20px" paddingTop="7px" marginLeft="50px">
+              <Heading fontSize="20px" marginTop="5px" marginLeft="50px" marginRight="auto">
                   Resultaten: {data["hydra:totalItems"]}
-                </Heading>
-                <MenuButton
-                  as={Button}
-                  cursor={"pointer"}
-                  marginLeft="auto"
-                  marginRight="20px"
-                  border="1px solid black"
-                >
-                  Categorie
-                </MenuButton>
-                <MenuList>
-                  <MenuItem>Theater</MenuItem>
-                  <MenuItem>Film</MenuItem>
-                  <MenuItem>Muziek</MenuItem>
-                </MenuList>
-              </Menu>
-              <Input
+              </Heading>
+              <Text fontSize="20px"  mr="10px">Sorteer op:</Text>
+              <div className="dropdown">
+                Datum
+                <ul className="dropdown-content">
+                  <li>Nieuwste - oud</li>
+                  <li>Oudste - nieuw</li>
+                </ul>  
+              </div>
+              <div className="dropdown">
+                Categorieën
+                <ul className="dropdown-content">
+                  <li>Theater</li>
+                  <li>Kermis</li>
+                </ul>  
+              </div>
+              {/* <Input
                 placeholder="Zoeken"
                 width="20%"
                 marginRight="50px"
                 bgColor="gray.50"
                 border="1px solid black"
-              />
+              /> */}
             </Flex>
           </Box>
         </div>

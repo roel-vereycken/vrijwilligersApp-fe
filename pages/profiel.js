@@ -1,7 +1,7 @@
 process.env["NODE_TLS_REJECT_UNAUTHORIZED"] = 0;
 
 import axios from "axios";
-import { Box, Flex, Text } from "@chakra-ui/react";
+import { Box, Center, Flex, Heading, Text } from "@chakra-ui/react";
 import Navbar from "../components/Navbar";
 import ProfileForm from "../components/ProfileForm";
 
@@ -9,21 +9,39 @@ export default function profiel({ data }) {
   return (
     <>
       <Flex>
-        <Box width="20%">
+        <Box
+          width={["0px", "0px", "0px", "20%"]}
+          display={["none", "none", "none", "block"]}
+        >
           <Navbar page="profiel" />
         </Box>
-        <Box bgColor="gray.200" width="80%" minHeight="100vh">
-          <Flex>
-            <Box width="50%">
+        <Box
+          width={["100%", "100%", "100%", "80%"]}
+          bgColor="gray.200"
+          minHeight="100%"
+        >
+          <Flex
+            flexDirection={["column", "column", "row", "row"]}
+            minHeight="100vh"
+          >
+            <Box width={["100%", "100%", "50%", "50%"]}>
               <ProfileForm data={data} />
             </Box>
             <Box
-              width="50%"
+              width={["100%", "100%", "50%", "50%"]}
               marginTop="80px"
               paddingRight="50px"
-              borderLeft="1px solid black"
+              borderLeft={["none", "none", "1px solid black"]}
+              borderTop={["1px solid black", "1px solid black", "none"]}
             >
-              <Text paddingLeft="50px" fontSize="20px" marginTop="50px">
+              <Heading
+                paddingLeft="50px"
+                mb="10px"
+                mt={["20px", "20px", "0px"]}
+              >
+                Info:{" "}
+              </Heading>
+              <Text paddingLeft="50px" fontSize="20px">
                 Hier kan je je persoonlijke gegevens aanpassen.
                 <br />
                 <br />
@@ -46,7 +64,7 @@ export default function profiel({ data }) {
 }
 
 export async function getServerSideProps() {
-  const resp = await axios.get("https://127.0.0.1:8000/api/users/3.json");
+  const resp = await axios.get("https://127.0.0.1:8000/api/users/4.json");
   const data = resp.data;
   return {
     props: {
