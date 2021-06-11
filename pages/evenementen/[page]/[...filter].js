@@ -3,11 +3,11 @@ process.env["NODE_TLS_REJECT_UNAUTHORIZED"] = 0;
 import axios from "axios";
 import { Box, Flex, Center } from "@chakra-ui/react";
 
-import ResponsiveNavbar from "../../components/ResponsiveNavbar";
-import Navbar from "../../components/Navbar";
-import EvenementenGrid from "../../components/EvenementenGrid";
-import Searchbar from "../../components/Searchbar";
-import Pagination from "../../components/Pagination";
+import ResponsiveNavbar from "../../../components/ResponsiveNavbar";
+import Navbar from "../../../components/Navbar";
+import EvenementenGrid from "../../../components/EvenementenGrid";
+import Searchbar from "../../../components/Searchbar";
+import Pagination from "../../../components/Pagination";
 
 export default function Evenementen({ data, page }) {
   //console.log("data?", data["hydra:member"]);
@@ -49,9 +49,10 @@ export default function Evenementen({ data, page }) {
 }
 
 export async function getServerSideProps(context) {
-  const { page } = context.query;
+  const { page, filter } = context.query;
+  const categorieFilter = filter[1] ? `&eventCategorie.naam=${filter[1]}` : "";
   const resp = await axios.get(
-    `https://127.0.0.1:8000/api/events.jsonld?page=${page}`
+    `https://127.0.0.1:8000/api/events.jsonld?page=${page}&order[startDatum]=${filter[0]}${categorieFilter}`
   );
   const data = resp.data;
   return {

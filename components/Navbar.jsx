@@ -45,7 +45,7 @@ function Navbar( {page} ) {
 
             
             <ListItem>
-            <Link href="/evenementen/1"><a>
+            <Link href="/evenementen/1/asc"><a>
                 <Flex>
                     <Icon 
                     as={FaCalendar}

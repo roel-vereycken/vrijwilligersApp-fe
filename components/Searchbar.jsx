@@ -1,4 +1,6 @@
 import React from 'react'
+import Link from 'next/link'
+
 import {
     Box,
     Button,
@@ -24,8 +26,12 @@ function Searchbar( {data} ) {
               <div className="dropdown">
                 Datum
                 <ul className="dropdown-content">
-                  <li>Nieuwste - oud</li>
-                  <li>Oudste - nieuw</li>
+                  <Link href="/evenementen/1/asc"><a className="dropdownItems">
+                    <li>Nieuwste - oud</li>
+                  </a></Link>
+                  <Link href="/evenementen/1/desc"><a className="dropdownItems">
+                    <li>Oudste - nieuw</li>
+                  </a></Link>
                 </ul>  
               </div>
               <div className="dropdown">

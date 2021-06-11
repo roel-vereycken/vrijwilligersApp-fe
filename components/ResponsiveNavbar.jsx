@@ -4,7 +4,6 @@ import Link from 'next/link'
 
 import {
   Box,
-  Button,
   Heading,
   Drawer,
   DrawerBody,

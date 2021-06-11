@@ -2,13 +2,17 @@ import React from 'react'
 import Link from "next/link";
 import { Box, IconButton, Button} from "@chakra-ui/react";
 import { ChevronLeftIcon, ChevronRightIcon } from "@chakra-ui/icons";
+import { useRouter } from 'next/router'
 
 function Pagination({page, pageNumber, pageNumberArray}) {
+    const router = useRouter()
+    const order = router.query.filter[0]
+    const categorie = router.query.filter[1] ? router.query.filter[1] : ""
     return (
         <div>
             <Box marginTop="35px">
               {pageNumber - Number(page) === 0 && (
-                <Link href={`/evenementen/${Number(page) - 1}`}>
+                <Link href={`/evenementen/${Number(page) - 1}/${order}/${categorie}`}>
                   <IconButton
                     height="30px"
                     width="30px"
@@ -19,7 +23,7 @@ function Pagination({page, pageNumber, pageNumberArray}) {
               )}
               
               {pageNumberArray.map((pagenr) => (
-                <Link href={`/evenementen/${pagenr}`}>
+                <Link href={`/evenementen/${pagenr}/${order}/${categorie}`}>
                   <Button
                     bgColor={Number(page) === pagenr ? "yellow" : ""}
                     key={pagenr}
@@ -35,7 +39,7 @@ function Pagination({page, pageNumber, pageNumberArray}) {
               ))}
 
               {pageNumber - Number(page) > 0 && (
-                <Link href={`/evenementen/${Number(page) + 1}`}>
+                <Link href={`/evenementen/${Number(page) + 1}/${order}/${categorie}`}>
                   <IconButton
                     marginLeft="10px"
                     height="30px"

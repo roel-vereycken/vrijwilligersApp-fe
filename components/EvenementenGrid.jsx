@@ -9,6 +9,8 @@ import {
     Text,
   } from "@chakra-ui/react";
 import Link from 'next/link'
+import Moment from "react-moment";
+
 
 function EvenementenGrid({data}) {
     console.log(data)
@@ -60,7 +62,7 @@ function EvenementenGrid({data}) {
                     />
                   </Center>
                   <Text pl="15px" pt="5px" >
-                    Datum: {evenement.startDatum}
+                    Datum: <Moment format="DD/MM/YYYY">{evenement.startDatum}</Moment>
                   </Text>
                   
                 </Box>

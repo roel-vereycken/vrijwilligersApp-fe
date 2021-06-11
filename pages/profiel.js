@@ -4,6 +4,7 @@ import axios from "axios";
 import { Box, Center, Flex, Heading, Text } from "@chakra-ui/react";
 import Navbar from "../components/Navbar";
 import ProfileForm from "../components/ProfileForm";
+import ResponsiveNavbar from "../components/ResponsiveNavbar";
 
 export default function profiel({ data }) {
   return (
@@ -20,6 +21,9 @@ export default function profiel({ data }) {
           bgColor="gray.200"
           minHeight="100%"
         >
+          <Box display={["block", "block", "block", "none"]}>
+            <ResponsiveNavbar page="profiel" />
+          </Box>
           <Flex
             flexDirection={["column", "column", "row", "row"]}
             minHeight="100vh"

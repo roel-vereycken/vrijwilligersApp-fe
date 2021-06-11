@@ -3,7 +3,8 @@ import axios from "axios";
 import { Box, Flex } from "@chakra-ui/react";
 import Navbar from "../components/Navbar";
 import Searchbar from "../components/Searchbar";
-
+import Moment from "react-moment";
+import ResponsiveNavbar from "../components/ResponsiveNavbar";
 export default function mijnTaken({ data }) {
   console.log(data.taakverdeling);
   return (
@@ -20,8 +21,13 @@ export default function mijnTaken({ data }) {
           bgColor="gray.200"
           minHeight="100vh"
         >
-          <Searchbar data={[]} />
-          <Box width="100%" paddingX="45px">
+          {/* <Box display={["none", "none", "none", "block"]}>
+            <Searchbar data={[]} />
+          </Box> */}
+          <Box display={["block", "block", "block", "none"]}>
+            <ResponsiveNavbar page="taken" />
+          </Box>
+          <Box width="100%" paddingX={["10px", "10px", "45px"]}>
             <table>
               <tr>
                 <th>Evenement</th>
@@ -35,7 +41,9 @@ export default function mijnTaken({ data }) {
                     <td>{taak.eventId.naam}</td>
                     <td>{taak.taakId.naam}</td>
                     <td>{taak.eventId.eventCategorie.naam}</td>
-                    <td>{taak.datum}</td>
+                    <td>
+                      <Moment format="DD/MM/YYYY">{taak.datum}</Moment>
+                    </td>
                   </tr>
                 ))}
             </table>

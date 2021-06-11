@@ -1,6 +1,6 @@
 import { ChakraProvider } from "@chakra-ui/react";
 import "../styles/globals.css";
-import "../styles/table.css";
+import "../styles/table.scss";
 import "../styles/dropdown.scss";
 
 function MyApp({ Component, pageProps }) {
