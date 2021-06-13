@@ -2,9 +2,12 @@ import React, {useState, useEffect} from 'react'
 import axios from "axios";
 import useSWR from "swr";
 import { useRouter } from 'next/router'
-import {Box} from "@chakra-ui/react";
+import {Box, Text} from "@chakra-ui/react";
 import Taak from "./Taak"
 import TaakBevestiging from "./TaakBevestiging"
+import Moment from "react-moment";
+import moment from 'moment';
+
 
 const fetcher = (url) => axios.get(url).then((res) => res.data);
 
@@ -13,13 +16,12 @@ function TakenBox() {
   const { id } = router.query
   const deelnemers = []
   const [gekozenTaak, setGekozenTaak] = useState({})
-  
-  const { data, error, isValidating } = useSWR(
+  const deadline = moment().subtract(2, 'days')
+
+  const { data } = useSWR(
     `https://127.0.0.1:8000/api/event_taaks.jsonld?eventId.id=${id}`,
     fetcher,
-    { refreshInterval: 1000 }
   );
-
   useEffect(() => {
     /**
      * de setGekozentaak neemt de gefetchte data op de index waarop de gefilterde 
@@ -34,6 +36,7 @@ function TakenBox() {
      */
     data && 
     setGekozenTaak(data["hydra:member"][data["hydra:member"].map(((taak)=> (taak.users.filter(x=> x.id == 4)).length)).indexOf(1)])
+    // console.log(gekozenTaak)
   })
 
   /**
@@ -53,10 +56,28 @@ function TakenBox() {
                 marginRight="10px"
                 width="100%"
               >
-
+              
+              {/* Geeft loading als de fetch gebeurt */}
+              {!data && <Text  
+                            margin="10px"
+                            border="1px solid black"
+                            borderRadius="7"
+                            padding="5px">
+                            Laden...
+                          </Text>}
+              {/* Geeft een boodschap als er geen taken zijn */}
+              {data && data["hydra:member"].length === 0 && 
+                          <Text  
+                            margin="10px"
+                            border="1px solid black"
+                            borderRadius="7"
+                            padding="5px">
+                            Er zijn nog geen taken.
+                          </Text>}
+              {/* Geeft de taken waarvoor je ja kan aanmelden of een kaart met de taak die je gekozen hebt */}
               {
-                    gekozenTaak && deelnemers.filter(x => x.id == 4).length > 0 ? <TaakBevestiging taak={gekozenTaak} /> : 
-                    data && data["hydra:member"].map((taak) => <Taak key={taak.id} taak={taak}/>)
+              gekozenTaak && deelnemers.filter(x => x.id == 4).length > 0 ? <TaakBevestiging eventId={id} taak={gekozenTaak} /> : 
+              data && data["hydra:member"].map((taak) => <Taak key={taak.id} eventId={id} taak={taak}/>)
               }
               </Box>
         </div>

@@ -9,7 +9,7 @@ import EvenementenGrid from "../../../components/EvenementenGrid";
 import Searchbar from "../../../components/Searchbar";
 import Pagination from "../../../components/Pagination";
 
-export default function Evenementen({ data, page }) {
+export default function Evenementen({ data, page, categories }) {
   //console.log("data?", data["hydra:member"]);
   const pageNumber = Math.ceil(data["hydra:totalItems"] / 6);
   const pageNumberArray = [...Array(pageNumber).keys()].map((page) => page + 1);
@@ -31,7 +31,7 @@ export default function Evenementen({ data, page }) {
             <ResponsiveNavbar />
           </Box>
           <Box display={["none", "none", "none", "block"]}>
-            <Searchbar data={data} />
+            <Searchbar data={data} categories={categories} />
           </Box>
           <EvenementenGrid data={data["hydra:member"]} />
 
@@ -55,10 +55,14 @@ export async function getServerSideProps(context) {
     `https://127.0.0.1:8000/api/events.jsonld?page=${page}&order[startDatum]=${filter[0]}${categorieFilter}`
   );
   const data = resp.data;
+
+  const resp2 = await axios.get("https://127.0.0.1:8000/api/categories.json");
+  const categories = resp2.data;
   return {
     props: {
       page,
       data,
+      categories,
     },
   };
 }

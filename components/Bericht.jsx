@@ -1,6 +1,6 @@
 import React, {useState} from 'react'
 import axios from 'axios';
-
+import {trigger} from "swr";
 import {
     Box,
   Button,
@@ -10,7 +10,7 @@ import {
 import Opmerking from "./Opmerking";
 
 
-function Bericht({berichtId, text, userName, userFirstName, comments}) {
+function Bericht({eventId, berichtId, text, userName, userFirstName, comments}) {
   const [active, setActive] = useState(false)
   const [reaction, setReaction] = useState("")
 
@@ -21,10 +21,9 @@ function Bericht({berichtId, text, userName, userFirstName, comments}) {
         opmerkingBericht: `/api/berichts/${berichtId}`,
         opmerkingUser: "/api/users/4"  
       })
-      .finally(() => {
-        setReaction("")
-        setActive(false)
-      })
+      setReaction("")
+      setActive(false)
+      trigger(`https://127.0.0.1:8000/api/berichts.json?eventBericht.id=${eventId}`)
       console.log(resp)
   }
     return (
@@ -81,7 +80,7 @@ function Bericht({berichtId, text, userName, userFirstName, comments}) {
                 </Box>}
                 
                 
-                {comments.map((comment) => <Opmerking key={comment.id} text={comment.body} userName={comment.opmerkingUser.naam} userFirstName={comment.opmerkingUser.voornaam}/>)}
+                {comments.map((comment) => <Opmerking key={comment.id}  text={comment.body} userName={comment.opmerkingUser.naam} userFirstName={comment.opmerkingUser.voornaam}/>)}
         </div>
     )
 }

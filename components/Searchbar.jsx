@@ -1,20 +1,15 @@
 import React from 'react'
 import Link from 'next/link'
-
+import { useRouter } from 'next/router'
 import {
     Box,
-    Button,
     Text,
     Flex,
     Heading,
-    Input,
-    Menu,
-    MenuButton,
-    MenuList,
-    MenuItem,
-
   } from "@chakra-ui/react";
-function Searchbar( {data} ) {
+function Searchbar( {data, categories} ) {
+  const router = useRouter()
+  const { filter } = router.query
     return (
         <div>
             <Box paddingTop="20px" borderBottom="1px solid black" paddingBottom="20px" bgColor="blue.300">
@@ -37,8 +32,8 @@ function Searchbar( {data} ) {
               <div className="dropdown">
                 Categorieën
                 <ul className="dropdown-content">
-                  <li>Theater</li>
-                  <li>Kermis</li>
+                  {categories && categories.map(categorie => <Link href={`/evenementen/1/${filter[0]}/${categorie.naam}`}><a className="dropdownItems"><li>{categorie.naam}</li></a></Link>)}
+                  
                 </ul>  
               </div>
               {/* <Input

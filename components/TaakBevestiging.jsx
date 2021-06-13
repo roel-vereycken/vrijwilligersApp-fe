@@ -1,8 +1,9 @@
 import React , {useEffect, useState} from 'react'
 import axios from "axios"
 import {Box, Text, List, ListItem, Flex, Button, OrderedList} from "@chakra-ui/react";
+import {trigger} from "swr"
 
-function TaakBevestiging({taak}) {
+function TaakBevestiging({taak, eventId}) {
     // const [taak, setTaak] = useState({})
     console.log("taak",taak.users)
     
@@ -15,8 +16,7 @@ function TaakBevestiging({taak}) {
         const resp = await axios.put(`https://127.0.0.1:8000/api/event_taaks/${taak.id}`, {
             users: putRequestIRI
         })
-        console.log(restoreUsers)
-        console.log(resp)
+        trigger(`https://127.0.0.1:8000/api/event_taaks.jsonld?eventId.id=${eventId}`)
     }
     return (
         <div>

@@ -5,18 +5,15 @@ import {
   Flex,
   Heading,
   Image,
-  SimpleGrid,
   Text,
   List,
   ListItem,
-  ListIcon,
-  OrderedList,
-  UnorderedList,
 } from "@chakra-ui/react";
 import Navbar from "../../components/Navbar";
 import ResponsiveNavbar from "../../components/ResponsiveNavbar";
 import TakenBox from "../../components/TakenBox";
 import BerichtBox from "../../components/BerichtBox";
+import Moment from "react-moment";
 
 export default function evenementDetail({ serverData }) {
   return (
@@ -58,7 +55,11 @@ export default function evenementDetail({ serverData }) {
                   <ListItem>
                     <Flex>
                       <Text fontWeight="bold">Datum:</Text>
-                      <Text marginLeft="7px">{serverData.startDatum}</Text>
+                      <Text marginLeft="7px">
+                        <Moment format="DD/MM/YYYY">
+                          {serverData.startDatum}
+                        </Moment>
+                      </Text>
                     </Flex>
                   </ListItem>
                   <ListItem>

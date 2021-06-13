@@ -1,9 +1,10 @@
 import React, {useState} from 'react'
 import { useRouter } from 'next/router'
-import useSWR from "swr";
+import useSWR, {trigger} from "swr";
 import {
     Box,
     Button,
+    Text,
     Textarea,
   } from "@chakra-ui/react";
 import Bericht from "./Bericht";
@@ -19,20 +20,21 @@ function BerichtBox( {berichten} ) {
     const [message, setMessage] = useState("")
 
   
-    const { data, error, isValidating } = useSWR(
+    const { data } = useSWR(
       `https://127.0.0.1:8000/api/berichts.json?eventBericht.id=${id}`,
       fetcher,
-      { refreshInterval: 1000 }
+      
     );
 
     const handleMessageSubmit = async(e) => {
       e.preventDefault()
       const resp = await axios.post("https://127.0.0.1:8000/api/berichts", {
-          body: message,
-          userBericht: "/api/users/3",
-          eventBericht: `/api/events/${id}`  
+        body: message,
+        userBericht: "/api/users/3",
+        eventBericht: `/api/events/${id}`  
       })
-      .finally(() => setMessage(""))
+      setMessage("")
+      trigger(`https://127.0.0.1:8000/api/berichts.json?eventBericht.id=${id}`)
       console.log(resp)
     }
 
@@ -46,8 +48,21 @@ function BerichtBox( {berichten} ) {
                 overflowY="auto"
                 marginLeft={[0, 0, 0, "30px"]}
               >
-
-                {data && data.map((bericht)=><Bericht key={bericht.id} berichtId={bericht.id} text={bericht.body} userName={bericht.userBericht.naam} userFirstName={bericht.userBericht.voornaam} comments={bericht.opmerkingen}/>)}
+                {!data && <Text  
+                            margin="10px"
+                            border="1px solid black"
+                            borderRadius="7"
+                            padding="5px">
+                            Laden...
+                          </Text>}
+                {data && data.length === 0 && 
+                  <Text margin="10px"
+                        border="1px solid black"
+                        borderRadius="7"
+                        padding="5px">
+                        Er zijn nog geen berichten bij dit evenement.
+                  </Text> }
+                {data && data.map((bericht)=><Bericht key={bericht.id} eventId={id} berichtId={bericht.id} text={bericht.body} userName={bericht.userBericht.naam} userFirstName={bericht.userBericht.voornaam} comments={bericht.opmerkingen}/>)}
 
                
 
