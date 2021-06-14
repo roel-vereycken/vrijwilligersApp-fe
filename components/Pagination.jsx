@@ -1,57 +1,57 @@
-import React from 'react'
+import React from "react";
 import Link from "next/link";
-import { Box, IconButton, Button} from "@chakra-ui/react";
+import { Box, IconButton, Button } from "@chakra-ui/react";
 import { ChevronLeftIcon, ChevronRightIcon } from "@chakra-ui/icons";
-import { useRouter } from 'next/router'
+import { useRouter } from "next/router";
 
-function Pagination({page, pageNumber, pageNumberArray}) {
-    const router = useRouter()
-    const order = router.query.filter[0]
-    const categorie = router.query.filter[1] ? router.query.filter[1] : ""
-    return (
-        <div>
-            <Box marginTop="35px">
-              {pageNumber - Number(page) === 0 && (
-                <Link href={`/evenementen/${Number(page) - 1}/${order}/${categorie}`}>
-                  <IconButton
-                    height="30px"
-                    width="30px"
-                    icon={<ChevronLeftIcon />}
-                    border="1px solid grey"
-                  />
-                </Link>
-              )}
-              
-              {pageNumberArray.map((pagenr) => (
-                <Link href={`/evenementen/${pagenr}/${order}/${categorie}`}>
-                  <Button
-                    bgColor={Number(page) === pagenr ? "yellow" : ""}
-                    key={pagenr}
-                    id={pagenr}
-                    height="30px"
-                    width="30px"
-                    marginLeft="10px"
-                    border="1px solid grey"
-                  >
-                    {pagenr}
-                  </Button>
-                </Link>
-              ))}
+function Pagination({ page, pageNumber, pageNumberArray }) {
+  const router = useRouter();
+  const order = router.query.filter[0];
+  const categorie = router.query.filter[1] ? router.query.filter[1] : "";
+  return (
+    <div>
+      <Box marginTop="35px">
+        {pageNumber - Number(page) === 0 && (
+          <Link href={`/evenementen/${Number(page) - 1}/${order}/${categorie}`}>
+            <IconButton
+              height="30px"
+              width="30px"
+              icon={<ChevronLeftIcon />}
+              border="1px solid grey"
+            />
+          </Link>
+        )}
 
-              {pageNumber - Number(page) > 0 && (
-                <Link href={`/evenementen/${Number(page) + 1}/${order}/${categorie}`}>
-                  <IconButton
-                    marginLeft="10px"
-                    height="30px"
-                    width="30px"
-                    icon={<ChevronRightIcon />}
-                    border="1px solid grey"
-                  />
-                </Link>
-              )}
-            </Box>
-        </div>
-    )
+        {pageNumberArray.map((pagenr) => (
+          <Link href={`/evenementen/${pagenr}/${order}/${categorie}`}>
+            <Button
+              bgColor={Number(page) === pagenr ? "yellow" : ""}
+              key={pagenr}
+              id={pagenr}
+              height="30px"
+              width="30px"
+              marginLeft="10px"
+              border="1px solid grey"
+            >
+              {pagenr}
+            </Button>
+          </Link>
+        ))}
+
+        {pageNumber - Number(page) > 0 && (
+          <Link href={`/evenementen/${Number(page) + 1}/${order}/${categorie}`}>
+            <IconButton
+              marginLeft="10px"
+              height="30px"
+              width="30px"
+              icon={<ChevronRightIcon />}
+              border="1px solid grey"
+            />
+          </Link>
+        )}
+      </Box>
+    </div>
+  );
 }
 
-export default Pagination
+export default Pagination;

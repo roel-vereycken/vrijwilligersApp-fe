@@ -22,7 +22,7 @@ function Opmerking({text, userName, userFirstName}) {
                   <Text>
                     {text}
                   </Text>
-                  <Text
+                  {/* <Text
                     marginLeft="auto"
                     width="90px"
                     fontSize="12px"
@@ -31,7 +31,7 @@ function Opmerking({text, userName, userFirstName}) {
                     fontWeight="bold"
                   >
                     Beantwoorden
-                  </Text>
+                  </Text> */}
                 </Box>
         </div>
     )

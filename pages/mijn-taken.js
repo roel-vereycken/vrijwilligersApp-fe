@@ -1,6 +1,8 @@
 import React from "react";
 import axios from "axios";
 import { Box, Flex } from "@chakra-ui/react";
+import nookies from "nookies";
+
 import Navbar from "../components/Navbar";
 import Searchbar from "../components/Searchbar";
 import Moment from "react-moment";
@@ -54,8 +56,15 @@ export default function mijnTaken({ data }) {
   );
 }
 
-export async function getServerSideProps() {
-  const resp = await axios.get(`https://127.0.0.1:8000/api/users/4`);
+export async function getServerSideProps(context) {
+  const cookies = nookies.get(context);
+
+  const resp = await axios.get(`https://127.0.0.1:8000/api/users/4`, {
+    headers: {
+      Authorization: "Bearer " + cookies.User,
+    },
+    withCredentials: true,
+  });
   const data = resp.data;
   return {
     props: {

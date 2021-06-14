@@ -41,7 +41,7 @@ export default function evenementDetail({ serverData }) {
                 borderRadius="7"
                 width={["100%", "366px", "680px", "550px"]}
                 height={[0, "173px", "308px", "260px"]}
-                src={`http://localhost/vrijwilligersApp/public/images/afbeeldingen/${serverData.afbeelding}`}
+                src={`https://localhost/vrijwilligersApp/public/images/afbeeldingen/${serverData.afbeelding}`}
                 fallbackSrc="https://dummyimage.com/550x260/000/fff"
               />
               <Box marginLeft="40px" width="40%">
