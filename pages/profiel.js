@@ -5,6 +5,7 @@ import { Box, Center, Flex, Heading, Text } from "@chakra-ui/react";
 import Navbar from "../components/Navbar";
 import ProfileForm from "../components/ProfileForm";
 import ResponsiveNavbar from "../components/ResponsiveNavbar";
+import nookies from "nookies";
 
 export default function profiel({ data }) {
   return (
@@ -67,8 +68,15 @@ export default function profiel({ data }) {
   );
 }
 
-export async function getServerSideProps() {
-  const resp = await axios.get("https://127.0.0.1:8000/api/users/4.json");
+export async function getServerSideProps(context) {
+  const cookies = nookies.get(context);
+
+  const resp = await axios.get("https://127.0.0.1:8000/api/users/3.json", {
+    headers: {
+      Authorization: "Bearer " + cookies.User,
+    },
+    withCredentials: true,
+  });
   const data = resp.data;
   return {
     props: {

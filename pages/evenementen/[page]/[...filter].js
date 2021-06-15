@@ -55,7 +55,6 @@ export async function getServerSideProps(context) {
 
   const decoded = jwt_decode(cookies.User);
 
-  console.log("hallo", decoded);
   const { page, filter } = context.query;
   const categorieFilter = filter[1] ? `&eventCategorie.naam=${filter[1]}` : "";
 

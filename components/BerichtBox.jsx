@@ -1,32 +1,59 @@
 import React, { useState } from "react";
 import { useRouter } from "next/router";
+import { parseCookies } from "nookies";
 import useSWR, { trigger } from "swr";
 import { Box, Button, Text, Textarea } from "@chakra-ui/react";
 import Bericht from "./Bericht";
 import axios from "axios";
 
-const fetcher = (url) => axios.get(url).then((res) => res.data);
+const cookies = parseCookies();
 
-function BerichtBox({ berichten }) {
+const fetcher = (url, token) =>
+  axios
+    .get(url, {
+      headers: {
+        Authorization: "Bearer " + token,
+      },
+    })
+    .then((res) => res.data);
+
+function BerichtBox() {
   const router = useRouter();
+
   const { id } = router.query;
-  // console.log(berichten)
+
   const [message, setMessage] = useState("");
 
+  /* Swr om data te fetchen */
   const { data } = useSWR(
-    `https://127.0.0.1:8000/api/berichts.json?eventBericht.id=${id}`,
+    [
+      `https://127.0.0.1:8000/api/berichts.json?eventBericht.id=${id}`,
+      cookies.User,
+    ],
     fetcher
   );
-
+  /* Handler om een bericht te versturen */
   const handleMessageSubmit = async (e) => {
     e.preventDefault();
-    const resp = await axios.post("https://127.0.0.1:8000/api/berichts", {
-      body: message,
-      userBericht: "/api/users/3",
-      eventBericht: `/api/events/${id}`,
-    });
+    const resp = await axios.post(
+      "https://127.0.0.1:8000/api/berichts",
+      {
+        body: message,
+        userBericht: "/api/users/3",
+        eventBericht: `/api/events/${id}`,
+      },
+      {
+        headers: {
+          Authorization: "Bearer " + cookies.User,
+        },
+      }
+    );
     setMessage("");
-    trigger(`https://127.0.0.1:8000/api/berichts.json?eventBericht.id=${id}`);
+
+    trigger([
+      `https://127.0.0.1:8000/api/berichts.json?eventBericht.id=${id}`,
+      cookies.User,
+    ]);
     console.log(resp);
   };
 
@@ -70,6 +97,7 @@ function BerichtBox({ berichten }) {
               userName={bericht.userBericht.naam}
               userFirstName={bericht.userBericht.voornaam}
               comments={bericht.opmerkingen}
+              createdAt={bericht.createdAt}
             />
           ))}
 

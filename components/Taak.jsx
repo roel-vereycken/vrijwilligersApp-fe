@@ -12,6 +12,9 @@ import {
 } from "@chakra-ui/react";
 import { CloseIcon } from "@chakra-ui/icons";
 import { trigger } from "swr";
+import { parseCookies } from "nookies";
+
+const cookies = parseCookies();
 
 function Taak({ taak, eventId }) {
   const users = [];
@@ -25,11 +28,17 @@ function Taak({ taak, eventId }) {
       `https://127.0.0.1:8000/api/event_taaks/${taak.id}`,
       {
         users: [...users, "api/users/4"],
+      },
+      {
+        headers: {
+          Authorization: "Bearer " + cookies.User,
+        },
       }
     );
-    trigger(
-      `https://127.0.0.1:8000/api/event_taaks.jsonld?eventId.id=${eventId}`
-    );
+    trigger([
+      `https://127.0.0.1:8000/api/event_taaks.jsonld?eventId.id=${eventId}`,
+      cookies.User,
+    ]);
     console.log(resp);
   };
   return (

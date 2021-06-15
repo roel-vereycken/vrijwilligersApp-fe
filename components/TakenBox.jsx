@@ -3,12 +3,23 @@ import axios from "axios";
 import useSWR from "swr";
 import { useRouter } from "next/router";
 import { Box, Text } from "@chakra-ui/react";
+import { parseCookies } from "nookies";
+
 import Taak from "./Taak";
 import TaakBevestiging from "./TaakBevestiging";
 import Moment from "react-moment";
 import moment from "moment";
 
-const fetcher = (url) => axios.get(url).then((res) => res.data);
+const cookies = parseCookies();
+
+const fetcher = (url, token) =>
+  axios
+    .get(url, {
+      headers: {
+        Authorization: "Bearer " + token,
+      },
+    })
+    .then((res) => res.data);
 
 function TakenBox() {
   const router = useRouter();
@@ -18,7 +29,11 @@ function TakenBox() {
   const deadline = moment().subtract(2, "days");
 
   const { data } = useSWR(
-    `https://127.0.0.1:8000/api/event_taaks.jsonld?eventId.id=${id}`,
+    [
+      `https://127.0.0.1:8000/api/event_taaks.jsonld?eventId.id=${id}`,
+      cookies.User,
+    ],
+
     fetcher
   );
   useEffect(() => {

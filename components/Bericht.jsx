@@ -1,8 +1,12 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { trigger } from "swr";
-import { Box, Button, Text, Textarea } from "@chakra-ui/react";
+import { Box, Button, Text, Textarea, Flex } from "@chakra-ui/react";
 import Opmerking from "./Opmerking";
+import { parseCookies } from "nookies";
+import Moment from "react-moment";
+
+const cookies = parseCookies();
 
 function Bericht({
   eventId,
@@ -11,22 +15,33 @@ function Bericht({
   userName,
   userFirstName,
   comments,
+  createdAt,
 }) {
   const [active, setActive] = useState(false);
   const [reaction, setReaction] = useState("");
 
+  /* Handler om een opmerking te versturen */
   const handleReactionSubmit = async (e) => {
     e.preventDefault();
-    const resp = await axios.post("https://127.0.0.1:8000/api/opmerkings", {
-      body: reaction,
-      opmerkingBericht: `/api/berichts/${berichtId}`,
-      opmerkingUser: "/api/users/4",
-    });
+    const resp = await axios.post(
+      "https://127.0.0.1:8000/api/opmerkings",
+      {
+        body: reaction,
+        opmerkingBericht: `/api/berichts/${berichtId}`,
+        opmerkingUser: "/api/users/4",
+      },
+      {
+        headers: {
+          Authorization: "Bearer " + cookies.User,
+        },
+      }
+    );
     setReaction("");
     setActive(false);
-    trigger(
-      `https://127.0.0.1:8000/api/berichts.json?eventBericht.id=${eventId}`
-    );
+    trigger([
+      `https://127.0.0.1:8000/api/berichts.json?eventBericht.id=${eventId}`,
+      cookies.User,
+    ]);
     console.log(resp);
   };
   return (
@@ -37,9 +52,17 @@ function Bericht({
         borderRadius="7"
         padding="5px"
       >
-        <Text fontSize="12px">
-          Geplaatst door: {userFirstName} {userName}
-        </Text>
+        <Flex>
+          <Text fontSize="12px">
+            Geplaatst door: {userFirstName} {userName}
+          </Text>
+          <Text fontSize="12px" marginLeft="auto">
+            <Moment fromNow locale="nl">
+              {createdAt}
+            </Moment>
+          </Text>
+        </Flex>
+
         <Text>{text}</Text>
         <Text
           marginLeft="auto"

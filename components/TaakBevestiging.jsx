@@ -10,6 +10,9 @@ import {
   OrderedList,
 } from "@chakra-ui/react";
 import { trigger } from "swr";
+import { parseCookies } from "nookies";
+
+const cookies = parseCookies();
 
 function TaakBevestiging({ taak, eventId }) {
   // const [taak, setTaak] = useState({})
@@ -26,11 +29,17 @@ function TaakBevestiging({ taak, eventId }) {
       `https://127.0.0.1:8000/api/event_taaks/${taak.id}`,
       {
         users: putRequestIRI,
+      },
+      {
+        headers: {
+          Authorization: "Bearer " + cookies.User,
+        },
       }
     );
-    trigger(
-      `https://127.0.0.1:8000/api/event_taaks.jsonld?eventId.id=${eventId}`
-    );
+    trigger([
+      `https://127.0.0.1:8000/api/event_taaks.jsonld?eventId.id=${eventId}`,
+      cookies.User,
+    ]);
   };
   return (
     <div>

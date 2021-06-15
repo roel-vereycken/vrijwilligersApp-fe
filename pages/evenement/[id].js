@@ -1,5 +1,7 @@
 import React from "react";
 import axios from "axios";
+import nookies from "nookies";
+
 import {
   Box,
   Flex,
@@ -100,9 +102,16 @@ export default function evenementDetail({ serverData }) {
 }
 
 export async function getServerSideProps(context) {
+  const cookies = nookies.get(context);
   const { id } = context.query;
   const resp = await axios.get(
-    `https://127.0.0.1:8000/api/events/${id}.jsonld`
+    `https://127.0.0.1:8000/api/events/${id}.jsonld`,
+    {
+      headers: {
+        Authorization: "Bearer " + cookies.User,
+      },
+      withCredentials: true,
+    }
   );
   const serverData = resp.data;
   return {
