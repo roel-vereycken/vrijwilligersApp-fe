@@ -25,9 +25,9 @@ function Taak({ taak, eventId }) {
   const handleAanmeldenClick = async (e) => {
     e.preventDefault();
     const resp = await axios.put(
-      `https://127.0.0.1:8000/api/event_taaks/${taak.id}`,
+      `https://wdev2.be/roel21/eindwerk/api/event_taaks/${taak.id}`,
       {
-        users: [...users, "api/users/4"],
+        users: [...users, "api/users/3"],
       },
       {
         headers: {
@@ -36,7 +36,7 @@ function Taak({ taak, eventId }) {
       }
     );
     trigger([
-      `https://127.0.0.1:8000/api/event_taaks.jsonld?eventId.id=${eventId}`,
+      `https://wdev2.be/roel21/eindwerk/api/event_taaks.jsonld?eventId.id=${eventId}`,
       cookies.User,
     ]);
     console.log(resp);

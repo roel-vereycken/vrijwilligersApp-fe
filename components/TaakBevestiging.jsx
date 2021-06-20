@@ -16,17 +16,21 @@ const cookies = parseCookies();
 
 function TaakBevestiging({ taak, eventId }) {
   // const [taak, setTaak] = useState({})
-  console.log("taak", taak.users);
+  // console.log("taak", taak.users);
 
   const handleAnnulerenClick = async (e) => {
     e.preventDefault();
     const restoreUsers = taak.users.filter(
-      (user) => user["@id"] !== "/api/users/4"
+      (user) => user["@id"] !== "/roel21/eindwerk/api/users/3"
     );
+
+    // console.log("restore", restoreUsers);
+
     const putRequestIRI = [];
     restoreUsers.map((user) => putRequestIRI.push(user["@id"]));
+
     const resp = await axios.put(
-      `https://127.0.0.1:8000/api/event_taaks/${taak.id}`,
+      `https://wdev2.be/roel21/eindwerk/api/event_taaks/${taak.id}`,
       {
         users: putRequestIRI,
       },
@@ -37,9 +41,11 @@ function TaakBevestiging({ taak, eventId }) {
       }
     );
     trigger([
-      `https://127.0.0.1:8000/api/event_taaks.jsonld?eventId.id=${eventId}`,
+      `https://wdev2.be/roel21/eindwerk/api/event_taaks.jsonld?eventId.id=${eventId}`,
       cookies.User,
     ]);
+    console.log("klik");
+    console.log(resp);
   };
   return (
     <div>
@@ -60,7 +66,7 @@ function TaakBevestiging({ taak, eventId }) {
             <OrderedList>
               {taak.users &&
                 taak.users.map((user) => (
-                  <ListItem>
+                  <ListItem key="user.id">
                     {user.voornaam} {user.naam}
                   </ListItem>
                 ))}

@@ -24,11 +24,11 @@ function Bericht({
   const handleReactionSubmit = async (e) => {
     e.preventDefault();
     const resp = await axios.post(
-      "https://127.0.0.1:8000/api/opmerkings",
+      "https://wdev2.be/roel21/eindwerk/api/opmerkings",
       {
         body: reaction,
-        opmerkingBericht: `/api/berichts/${berichtId}`,
-        opmerkingUser: "/api/users/4",
+        opmerkingBericht: `/roel21/eindwerk/api/berichts/${berichtId}`,
+        opmerkingUser: "/roel21/eindwerk/api/users/3",
       },
       {
         headers: {
@@ -39,7 +39,7 @@ function Bericht({
     setReaction("");
     setActive(false);
     trigger([
-      `https://127.0.0.1:8000/api/berichts.json?eventBericht.id=${eventId}`,
+      `https://wdev2.be/roel21/eindwerk/api/berichts.json?eventBericht.id=${eventId}`,
       cookies.User,
     ]);
     console.log(resp);
@@ -62,8 +62,13 @@ function Bericht({
             </Moment>
           </Text>
         </Flex>
-
-        <Text>{text}</Text>
+        {/* Enkel de volgende tags worden behouden in een post/put :
+         <h1><em><strong><blockquote><ul><li><del><a><ol><br> */}
+        <Box
+          dangerouslySetInnerHTML={{
+            __html: text,
+          }}
+        ></Box>
         <Text
           marginLeft="auto"
           width="90px"

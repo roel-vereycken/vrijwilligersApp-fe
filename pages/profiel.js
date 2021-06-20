@@ -71,12 +71,15 @@ export default function profiel({ data }) {
 export async function getServerSideProps(context) {
   const cookies = nookies.get(context);
 
-  const resp = await axios.get("https://127.0.0.1:8000/api/users/3.json", {
-    headers: {
-      Authorization: "Bearer " + cookies.User,
-    },
-    withCredentials: true,
-  });
+  const resp = await axios.get(
+    `https://wdev2.be/roel21/eindwerk/api/users/${cookies.Id}.json`,
+    {
+      headers: {
+        Authorization: "Bearer " + cookies.User,
+      },
+      withCredentials: true,
+    }
+  );
   const data = resp.data;
   return {
     props: {

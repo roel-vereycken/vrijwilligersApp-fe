@@ -1,28 +1,26 @@
-import React from 'react'
-import {
-    Box,
-    Text,
-  } from "@chakra-ui/react";
+import React from "react";
+import { Box, Text } from "@chakra-ui/react";
 
-  
-function Opmerking({text, userName, userFirstName}) {
-    return (
-        <div>
-            <Box
-                  margin="10px"
-                  marginLeft="auto"
-                  border="1px solid black"
-                  borderRadius="7"
-                  padding="5px"
-                  width="80%"
-                >
-                  <Text fontSize="12px">
-                    Geplaatst door: {userFirstName} {userName}
-                  </Text>
-                  <Text>
-                    {text}
-                  </Text>
-                  {/* <Text
+function Opmerking({ text, userName, userFirstName }) {
+  return (
+    <div>
+      <Box
+        margin="10px"
+        marginLeft="auto"
+        border="1px solid black"
+        borderRadius="7"
+        padding="5px"
+        width="80%"
+      >
+        <Text fontSize="12px">
+          Geplaatst door: {userFirstName} {userName}
+        </Text>
+        <Box
+          dangerouslySetInnerHTML={{
+            __html: text,
+          }}
+        ></Box>
+        {/* <Text
                     marginLeft="auto"
                     width="90px"
                     fontSize="12px"
@@ -32,9 +30,9 @@ function Opmerking({text, userName, userFirstName}) {
                   >
                     Beantwoorden
                   </Text> */}
-                </Box>
-        </div>
-    )
+      </Box>
+    </div>
+  );
 }
 
-export default Opmerking
+export default Opmerking;

@@ -23,12 +23,16 @@ export default function login() {
 
   const handleLogin = async (e) => {
     e.preventDefault();
-    const resp = await axios.post("https://127.0.0.1:8000/api/login_check", {
-      username: email,
-      password: wachtwoord,
-    });
-    console.log(resp.data.token);
+    const resp = await axios.post(
+      "https://wdev2.be/roel21/eindwerk/api/login_check",
+      {
+        username: email,
+        password: wachtwoord,
+      }
+    );
+    console.log(resp.data.data.id);
     setCookie(null, "User", resp.data.token);
+    setCookie(null, "Id", resp.data.data.id);
     setEmail("");
     setWachtwoord("");
     router.push("/evenementen/1/asc");

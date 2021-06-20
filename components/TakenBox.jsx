@@ -30,7 +30,7 @@ function TakenBox() {
 
   const { data } = useSWR(
     [
-      `https://127.0.0.1:8000/api/event_taaks.jsonld?eventId.id=${id}`,
+      `https://wdev2.be/roel21/eindwerk/api/event_taaks.jsonld?eventId.id=${id}`,
       cookies.User,
     ],
 
@@ -52,7 +52,7 @@ function TakenBox() {
       setGekozenTaak(
         data["hydra:member"][
           data["hydra:member"]
-            .map((taak) => taak.users.filter((x) => x.id == 4).length)
+            .map((taak) => taak.users.filter((x) => x.id == 3).length)
             .indexOf(1)
         ]
       );
@@ -102,7 +102,7 @@ function TakenBox() {
           </Text>
         )}
         {/* Geeft de taken waarvoor je ja kan aanmelden of een kaart met de taak die je gekozen hebt */}
-        {gekozenTaak && deelnemers.filter((x) => x.id == 4).length > 0 ? (
+        {gekozenTaak && deelnemers.filter((x) => x.id == 3).length > 0 ? (
           <TaakBevestiging eventId={id} taak={gekozenTaak} />
         ) : (
           data &&

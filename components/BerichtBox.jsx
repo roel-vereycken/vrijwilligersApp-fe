@@ -27,7 +27,7 @@ function BerichtBox() {
   /* Swr om data te fetchen */
   const { data } = useSWR(
     [
-      `https://127.0.0.1:8000/api/berichts.json?eventBericht.id=${id}`,
+      `https://wdev2.be/roel21/eindwerk/api/berichts.json?eventBericht.id=${id}`,
       cookies.User,
     ],
     fetcher
@@ -36,11 +36,11 @@ function BerichtBox() {
   const handleMessageSubmit = async (e) => {
     e.preventDefault();
     const resp = await axios.post(
-      "https://127.0.0.1:8000/api/berichts",
+      "https://wdev2.be/roel21/eindwerk/api/berichts",
       {
         body: message,
-        userBericht: "/api/users/3",
-        eventBericht: `/api/events/${id}`,
+        userBericht: "/roel21/eindwerk/api/users/3",
+        eventBericht: `/roel21/eindwerk/api/events/${id}`,
       },
       {
         headers: {
@@ -51,7 +51,7 @@ function BerichtBox() {
     setMessage("");
 
     trigger([
-      `https://127.0.0.1:8000/api/berichts.json?eventBericht.id=${id}`,
+      `https://wdev2.be/roel21/eindwerk/api/berichts.json?eventBericht.id=${id}`,
       cookies.User,
     ]);
     console.log(resp);

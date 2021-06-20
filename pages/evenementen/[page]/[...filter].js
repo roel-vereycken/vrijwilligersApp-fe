@@ -1,5 +1,3 @@
-process.env["NODE_TLS_REJECT_UNAUTHORIZED"] = 0;
-
 import axios from "axios";
 import { Box, Flex, Center } from "@chakra-ui/react";
 import nookies from "nookies";
@@ -53,13 +51,27 @@ export default function Evenementen({ data, page, categories }) {
 export async function getServerSideProps(context) {
   const cookies = nookies.get(context);
 
-  const decoded = jwt_decode(cookies.User);
+  // const decodedUser = jwt_decode(cookies.User);
+  // const decodedId = jwt_decode(cookies.Id);
+
+  // console.log(decodedUser, decodedId);
 
   const { page, filter } = context.query;
   const categorieFilter = filter[1] ? `&eventCategorie.naam=${filter[1]}` : "";
 
   const resp = await axios.get(
-    `https://127.0.0.1:8000/api/events.jsonld?page=${page}&order[startDatum]=${filter[0]}${categorieFilter}`,
+    `https://wdev2.be/roel21/eindwerk/api/events.jsonld?page=${page}&order[startDatum]=${filter[0]}${categorieFilter}`,
+    {
+      headers: {
+        Authorization: "Bearer " + cookies.User,
+      },
+    }
+  );
+
+  const data = resp.data;
+
+  const resp2 = await axios.get(
+    "https://wdev2.be/roel21/eindwerk/api/categories.json",
     {
       headers: {
         Authorization: "Bearer " + cookies.User,
@@ -67,15 +79,6 @@ export async function getServerSideProps(context) {
       withCredentials: true,
     }
   );
-
-  const data = resp.data;
-
-  const resp2 = await axios.get("https://127.0.0.1:8000/api/categories.json", {
-    headers: {
-      Authorization: "Bearer " + cookies.User,
-    },
-    withCredentials: true,
-  });
 
   const categories = resp2.data;
 

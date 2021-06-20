@@ -15,8 +15,7 @@ function Navbar({ page }) {
 
     cookie.remove("User");
 
-    console.log("klik");
-    router.push("/login");
+    router.push("/");
   };
   return (
     <nav id="navBar">

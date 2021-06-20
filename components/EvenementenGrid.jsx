@@ -41,7 +41,7 @@ function EvenementenGrid({ data }) {
                         width="100%"
                         height={["120px", "175px"]}
                         src={`https://localhost/vrijwilligersApp/public/images/image.php/${evenement.afbeelding}?width=425&height=170&cropratio=425:170&image=/vrijwilligersApp/public/images/afbeeldingen/${evenement.afbeelding}`}
-                        fallbackSrc="https://dummyimage.com/320x150/000/fff"
+                        fallbackSrc="https://dummyimage.com/340x175/000/fff"
                       />
                       <Text
                         pl="15px"

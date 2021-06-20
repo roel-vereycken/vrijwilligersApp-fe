@@ -15,7 +15,7 @@ function ProfileForm({ data }) {
   const handleFormSubmit = async (e) => {
     e.preventDefault();
     const resp = await axios.put(
-      "https://127.0.0.1:8000/api/users/3",
+      "https://wdev2.be/roel21/eindwerk/api/users/3",
       {
         naam,
         voornaam,

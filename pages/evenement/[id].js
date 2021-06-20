@@ -65,7 +65,13 @@ export default function evenementDetail({ serverData }) {
                     </Flex>
                   </ListItem>
                   <ListItem>
-                    <Text fontWeight="bold">Locatie:</Text>
+                    <Flex>
+                      <Text fontWeight="bold">Locatie: </Text>
+                      <Text marginLeft="7px">
+                        {serverData.eventLocatie &&
+                          serverData.eventLocatie.naam}
+                      </Text>
+                    </Flex>
                   </ListItem>
                   <ListItem>
                     <Flex>
@@ -105,7 +111,7 @@ export async function getServerSideProps(context) {
   const cookies = nookies.get(context);
   const { id } = context.query;
   const resp = await axios.get(
-    `https://127.0.0.1:8000/api/events/${id}.jsonld`,
+    `https://wdev2.be/roel21/eindwerk/api/events/${id}.jsonld`,
     {
       headers: {
         Authorization: "Bearer " + cookies.User,
