@@ -13,6 +13,8 @@ export default function Evenementen({ data, page, categories }) {
   //console.log("data?", data["hydra:member"]);
   const pageNumber = Math.ceil(data["hydra:totalItems"] / 6);
   const pageNumberArray = [...Array(pageNumber).keys()].map((page) => page + 1);
+  console.log(pageNumber, pageNumberArray);
+
   return (
     <>
       <Flex>
@@ -35,7 +37,7 @@ export default function Evenementen({ data, page, categories }) {
           </Box>
           <EvenementenGrid data={data["hydra:member"]} />
 
-          <Center>
+          <Center marginTop="30px">
             <Pagination
               page={page} //paginanummer uit en voor de api
               pageNumber={pageNumber} //paginanummer op de button

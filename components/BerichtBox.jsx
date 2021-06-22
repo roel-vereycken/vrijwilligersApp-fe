@@ -39,7 +39,7 @@ function BerichtBox() {
       "https://wdev2.be/roel21/eindwerk/api/berichts",
       {
         body: message,
-        userBericht: "/roel21/eindwerk/api/users/3",
+        userBericht: `/roel21/eindwerk/api/users/${cookies.Id}`,
         eventBericht: `/roel21/eindwerk/api/events/${id}`,
       },
       {

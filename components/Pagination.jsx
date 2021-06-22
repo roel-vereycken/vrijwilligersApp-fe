@@ -10,8 +10,8 @@ function Pagination({ page, pageNumber, pageNumberArray }) {
   const categorie = router.query.filter[1] ? router.query.filter[1] : "";
   return (
     <div>
-      <Box marginTop="35px">
-        {pageNumber - Number(page) === 0 && (
+      <Box>
+        {pageNumber - Number(page) === 0 && pageNumber !== 1 && (
           <Link href={`/evenementen/${Number(page) - 1}/${order}/${categorie}`}>
             <IconButton
               height="30px"
@@ -38,7 +38,7 @@ function Pagination({ page, pageNumber, pageNumberArray }) {
           </Link>
         ))}
 
-        {pageNumber - Number(page) > 0 && (
+        {pageNumber - Number(page) >= 1 && (
           <Link href={`/evenementen/${Number(page) + 1}/${order}/${categorie}`}>
             <IconButton
               marginLeft="10px"

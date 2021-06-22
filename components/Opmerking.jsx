@@ -1,7 +1,8 @@
 import React from "react";
-import { Box, Text } from "@chakra-ui/react";
+import { Box, Flex, Text } from "@chakra-ui/react";
+import Moment from "react-moment";
 
-function Opmerking({ text, userName, userFirstName }) {
+function Opmerking({ text, userName, userFirstName, createdAt }) {
   return (
     <div>
       <Box
@@ -12,9 +13,16 @@ function Opmerking({ text, userName, userFirstName }) {
         padding="5px"
         width="80%"
       >
-        <Text fontSize="12px">
-          Geplaatst door: {userFirstName} {userName}
-        </Text>
+        <Flex>
+          <Text fontSize="12px">
+            Geplaatst door: {userFirstName} {userName}
+          </Text>
+          <Text fontSize="12px" marginLeft="auto">
+            <Moment fromNow locale="nl">
+              {createdAt}
+            </Moment>
+          </Text>
+        </Flex>
         <Box
           dangerouslySetInnerHTML={{
             __html: text,

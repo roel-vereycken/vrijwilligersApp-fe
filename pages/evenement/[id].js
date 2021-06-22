@@ -43,8 +43,9 @@ export default function evenementDetail({ serverData }) {
                 borderRadius="7"
                 width={["100%", "366px", "680px", "550px"]}
                 height={[0, "173px", "308px", "260px"]}
-                src={`https://localhost/vrijwilligersApp/public/images/afbeeldingen/${serverData.afbeelding}`}
-                fallbackSrc="https://dummyimage.com/550x260/000/fff"
+                //src={`https://localhost/vrijwilligersApp/public/images/afbeeldingen/${serverData.afbeelding}`}
+                src={`https://wdev2.be/roel21/eindwerk/images/image.php/${serverData.afbeelding}?image=/roel21/eindwerk/images/afbeeldingen/${serverData.afbeelding}`}
+                fallbackSrc="https://wdev2.be/roel21/eindwerk/images/image.php/theater.jpg?image=/roel21/eindwerk/images/afbeeldingen/theater.jpg"
               />
               <Box marginLeft="40px" width="40%">
                 <List fontSize="1.25rem">
@@ -76,7 +77,14 @@ export default function evenementDetail({ serverData }) {
                   <ListItem>
                     <Flex>
                       <Text fontWeight="bold">Beschrijving:</Text>
-                      <Text marginLeft="7px">{serverData.beschrijving}</Text>
+                      <Box
+                        marginLeft="7px"
+                        pt="4px"
+                        fontSize="16px"
+                        dangerouslySetInnerHTML={{
+                          __html: serverData.beschrijving,
+                        }}
+                      ></Box>
                     </Flex>
                   </ListItem>
                 </List>

@@ -21,7 +21,7 @@ function TaakBevestiging({ taak, eventId }) {
   const handleAnnulerenClick = async (e) => {
     e.preventDefault();
     const restoreUsers = taak.users.filter(
-      (user) => user["@id"] !== "/roel21/eindwerk/api/users/3"
+      (user) => user["@id"] !== `/roel21/eindwerk/api/users/${cookies.Id}`
     );
 
     // console.log("restore", restoreUsers);

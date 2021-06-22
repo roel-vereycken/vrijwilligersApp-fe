@@ -28,7 +28,7 @@ function Bericht({
       {
         body: reaction,
         opmerkingBericht: `/roel21/eindwerk/api/berichts/${berichtId}`,
-        opmerkingUser: "/roel21/eindwerk/api/users/3",
+        opmerkingUser: `/roel21/eindwerk/api/users/${cookies.Id}`,
       },
       {
         headers: {
@@ -118,6 +118,7 @@ function Bericht({
           text={comment.body}
           userName={comment.opmerkingUser.naam}
           userFirstName={comment.opmerkingUser.voornaam}
+          createdAt={createdAt}
         />
       ))}
     </div>

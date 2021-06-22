@@ -1,7 +1,7 @@
 process.env["NODE_TLS_REJECT_UNAUTHORIZED"] = 0;
 
 import axios from "axios";
-import { Box, Center, Flex, Heading, Text } from "@chakra-ui/react";
+import { Box, Flex, Heading, Text } from "@chakra-ui/react";
 import Navbar from "../components/Navbar";
 import ProfileForm from "../components/ProfileForm";
 import ResponsiveNavbar from "../components/ResponsiveNavbar";

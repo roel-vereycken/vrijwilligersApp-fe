@@ -1,7 +1,5 @@
 import {
   Box,
-  IconButton,
-  Button,
   Center,
   Divider,
   SimpleGrid,
@@ -12,7 +10,7 @@ import Link from "next/link";
 import Moment from "react-moment";
 
 function EvenementenGrid({ data }) {
-  console.log(data);
+  //console.log(data);
   return (
     <>
       <Box width="100%">
@@ -40,7 +38,8 @@ function EvenementenGrid({ data }) {
                         borderTopRadius="7"
                         width="100%"
                         height={["120px", "175px"]}
-                        src={`https://localhost/vrijwilligersApp/public/images/image.php/${evenement.afbeelding}?width=425&height=170&cropratio=425:170&image=/vrijwilligersApp/public/images/afbeeldingen/${evenement.afbeelding}`}
+                        //src={`https://localhost/vrijwilligersApp/public/images/image.php/${evenement.afbeelding}?width=425&height=170&cropratio=425:170&image=/vrijwilligersApp/public/images/afbeeldingen/${evenement.afbeelding}`}
+                        src={`https://wdev2.be/roel21/eindwerk/images/image.php/${evenement.afbeelding}?image=/roel21/eindwerk/images/afbeeldingen/${evenement.afbeelding}`}
                         fallbackSrc="https://dummyimage.com/340x175/000/fff"
                       />
                       <Text

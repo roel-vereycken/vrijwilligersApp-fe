@@ -27,7 +27,7 @@ function Taak({ taak, eventId }) {
     const resp = await axios.put(
       `https://wdev2.be/roel21/eindwerk/api/event_taaks/${taak.id}`,
       {
-        users: [...users, "api/users/3"],
+        users: [...users, `api/users/${cookies.Id}`],
       },
       {
         headers: {

@@ -15,7 +15,7 @@ function ProfileForm({ data }) {
   const handleFormSubmit = async (e) => {
     e.preventDefault();
     const resp = await axios.put(
-      "https://wdev2.be/roel21/eindwerk/api/users/3",
+      `https://wdev2.be/roel21/eindwerk/api/users/${cookies.Id}`,
       {
         naam,
         voornaam,
@@ -29,6 +29,7 @@ function ProfileForm({ data }) {
       }
     );
     console.log(resp);
+    alert("Dank je om je gegevens bij te werken");
   };
 
   return (
