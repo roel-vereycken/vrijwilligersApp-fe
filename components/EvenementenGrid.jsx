@@ -40,7 +40,7 @@ function EvenementenGrid({ data }) {
                         height={["120px", "175px"]}
                         //src={`https://localhost/vrijwilligersApp/public/images/image.php/${evenement.afbeelding}?width=425&height=170&cropratio=425:170&image=/vrijwilligersApp/public/images/afbeeldingen/${evenement.afbeelding}`}
                         src={`https://wdev2.be/roel21/eindwerk/images/image.php/${evenement.afbeelding}?image=/roel21/eindwerk/images/afbeeldingen/${evenement.afbeelding}`}
-                        fallbackSrc="https://dummyimage.com/340x175/000/fff"
+                        fallbackSrc="https://wdev2.be/roel21/eindwerk/images/image.php/theater.jpg?image=/roel21/eindwerk/images/afbeeldingen/theater.jpg"
                       />
                       <Text
                         pl="15px"

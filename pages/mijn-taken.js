@@ -59,19 +59,23 @@ export default function mijnTaken({ data }) {
 export async function getServerSideProps(context) {
   const cookies = nookies.get(context);
 
-  const resp = await axios.get(
-    `https://wdev2.be/roel21/eindwerk/api/users/${cookies.Id}`,
-    {
-      headers: {
-        Authorization: "Bearer " + cookies.User,
+  try {
+    const resp = await axios.get(
+      `https://wdev2.be/roel21/eindwerk/api/users/${cookies.Id}`,
+      {
+        headers: {
+          Authorization: "Bearer " + cookies.User,
+        },
+        withCredentials: true,
+      }
+    );
+    const data = resp.data;
+    return {
+      props: {
+        data,
       },
-      withCredentials: true,
-    }
-  );
-  const data = resp.data;
-  return {
-    props: {
-      data,
-    },
-  };
+    };
+  } catch (error) {
+    console.log(error);
+  }
 }

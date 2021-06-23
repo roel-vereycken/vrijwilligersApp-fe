@@ -29,12 +29,16 @@ export default function profiel({ data }) {
             flexDirection={["column", "column", "row", "row"]}
             minHeight="100vh"
           >
-            <Box width={["100%", "100%", "50%", "50%"]}>
-              <ProfileForm data={data} />
-            </Box>
             <Box
               width={["100%", "100%", "50%", "50%"]}
-              marginTop="80px"
+              paddingLeft={[0, 0, "10px", "40px"]}
+            >
+              <ProfileForm data={data} />
+            </Box>
+
+            <Box
+              width={["100%", "100%", "50%", "50%"]}
+              marginTop={["10px", "15px", "60px", "90px"]}
               paddingRight="50px"
               borderLeft={["none", "none", "1px solid black"]}
               borderTop={["1px solid black", "1px solid black", "none"]}
@@ -71,19 +75,23 @@ export default function profiel({ data }) {
 export async function getServerSideProps(context) {
   const cookies = nookies.get(context);
 
-  const resp = await axios.get(
-    `https://wdev2.be/roel21/eindwerk/api/users/${cookies.Id}.json`,
-    {
-      headers: {
-        Authorization: "Bearer " + cookies.User,
+  try {
+    const resp = await axios.get(
+      `https://wdev2.be/roel21/eindwerk/api/users/${cookies.Id}.json`,
+      {
+        headers: {
+          Authorization: "Bearer " + cookies.User,
+        },
+        withCredentials: true,
+      }
+    );
+    const data = resp.data;
+    return {
+      props: {
+        data,
       },
-      withCredentials: true,
-    }
-  );
-  const data = resp.data;
-  return {
-    props: {
-      data,
-    },
-  };
+    };
+  } catch (error) {
+    console.log(error);
+  }
 }

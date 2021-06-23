@@ -1,5 +1,3 @@
-process.env["NODE_TLS_REJECT_UNAUTHORIZED"] = 0;
-
 import React, { useState } from "react";
 import { parseCookies, setCookie, destroyCookie } from "nookies";
 import { useRouter } from "next/router";
@@ -7,6 +5,7 @@ import { useRouter } from "next/router";
 import axios from "axios";
 import {
   Box,
+  Text,
   Input,
   Heading,
   Flex,
@@ -20,22 +19,26 @@ export default function login() {
 
   const [email, setEmail] = useState("");
   const [wachtwoord, setWachtwoord] = useState("");
+  const [error, setError] = useState(false);
 
   const handleLogin = async (e) => {
     e.preventDefault();
-    const resp = await axios.post(
-      "https://wdev2.be/roel21/eindwerk/api/login_check",
-      {
-        username: email,
-        password: wachtwoord,
-      }
-    );
-    console.log(resp.data.data.id);
-    setCookie(null, "User", resp.data.token);
-    setCookie(null, "Id", resp.data.data.id);
-    setEmail("");
-    setWachtwoord("");
-    router.push("/evenementen/1/asc");
+    try {
+      setError(false);
+      const resp = await axios.post(
+        "https://wdev2.be/roel21/eindwerk/api/login_check",
+        {
+          username: email,
+          password: wachtwoord,
+        }
+      );
+      setCookie(null, "User", resp.data.token);
+      setCookie(null, "Id", resp.data.data.id);
+      router.push("/evenementen/1/asc");
+    } catch (error) {
+      console.log(error);
+      setError(true);
+    }
   };
 
   return (
@@ -64,6 +67,12 @@ export default function login() {
                 onChange={(e) => setWachtwoord(e.target.value)}
               />
             </FormControl>
+
+            {error && (
+              <Text marginLeft="50px" color="red">
+                Uw inloggevens zijn incorrect
+              </Text>
+            )}
 
             <Button
               width="140px"

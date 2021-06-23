@@ -35,7 +35,10 @@ function ProfileForm({ data }) {
   return (
     <form onSubmit={handleFormSubmit}>
       <Flex direction="column">
-        <FormControl className="profileTextField" paddingTop="90px">
+        <FormControl
+          className="profileTextField"
+          paddingTop={["10px", "15px", "60px", "90px"]}
+        >
           <FormLabel>Voornaam</FormLabel>
           <input
             className="profileInput"
@@ -78,6 +81,7 @@ function ProfileForm({ data }) {
           colorScheme="teal"
           marginTop="20px"
           type="submit"
+          marginBottom={["20px"]}
         >
           Sla wijzigingen op
         </Button>

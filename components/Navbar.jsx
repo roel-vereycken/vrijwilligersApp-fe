@@ -14,6 +14,7 @@ function Navbar({ page }) {
     e.preventDefault();
 
     cookie.remove("User");
+    cookie.remove("Id");
 
     router.push("/");
   };
