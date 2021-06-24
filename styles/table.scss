@@ -9,6 +9,9 @@ table {
     font-size: 20px;
     font-family: "Segoe UI", Helvetica, sans-serif;
   }
+  tr {
+    cursor: pointer;
+  }
   tr:nth-child(even) {
     background-color: gainsboro;
   }

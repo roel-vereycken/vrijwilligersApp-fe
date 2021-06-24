@@ -22,7 +22,6 @@ function Bericht({
   const [active, setActive] = useState(false);
   const [reaction, setReaction] = useState("");
   const decodedEmail = jwt_decode(cookies.User);
-  console.log(String(decodedEmail.username) == String(userEmail));
 
   /**
    * HANDLERS
@@ -166,9 +165,12 @@ function Bericht({
       {comments.map((comment) => (
         <Opmerking
           key={comment.id}
+          opmerkingId={comment.id}
+          eventId={eventId}
           text={comment.body}
           userName={comment.opmerkingUser.naam}
           userFirstName={comment.opmerkingUser.voornaam}
+          userEmail={comment.opmerkingUser.email}
           createdAt={comment.createdAt}
         />
       ))}

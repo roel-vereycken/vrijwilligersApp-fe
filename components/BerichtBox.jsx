@@ -31,7 +31,7 @@ function BerichtBox() {
       cookies.User,
     ],
     fetcher,
-    { refreshInterval: 30000 }
+    { refreshInterval: 15000 }
   );
   /* Handler om een bericht te versturen */
   const handleMessageSubmit = async (e) => {

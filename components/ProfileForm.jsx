@@ -3,6 +3,7 @@ import axios from "axios";
 import { Flex, FormControl, FormLabel, Button } from "@chakra-ui/react";
 import { parseCookies } from "nookies";
 import swal from "sweetalert";
+import Link from "next/link";
 
 const cookies = parseCookies();
 
@@ -80,7 +81,9 @@ function ProfileForm({ data }) {
               onChange={(e) => setTelefoon(e.target.value)}
             />
           </FormControl>
-          <a id="wachtwoordLink">Nieuw wachtwoord aanmaken</a>
+          <Link href="/nieuw-wachtwoord">
+            <a id="wachtwoordLink">Nieuw wachtwoord aanmaken</a>
+          </Link>
           <Button
             width="140px"
             marginLeft="50px"

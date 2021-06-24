@@ -1,8 +1,45 @@
 import React from "react";
+import axios from "axios";
 import { Box, Flex, Text } from "@chakra-ui/react";
 import Moment from "react-moment";
+import jwt_decode from "jwt-decode";
+import { parseCookies } from "nookies";
+import { trigger } from "swr";
 
-function Opmerking({ text, userName, userFirstName, createdAt }) {
+const cookies = parseCookies();
+
+function Opmerking({
+  eventId,
+  opmerkingId,
+  text,
+  userName,
+  userFirstName,
+  userEmail,
+  createdAt,
+}) {
+  console.log(opmerkingId);
+  const decodedEmail = jwt_decode(cookies.User);
+
+  const handleReactionDelete = async (e) => {
+    e.preventDefault();
+    try {
+      const resp = axios.delete(
+        `https://wdev2.be/roel21/eindwerk/api/opmerkings/${opmerkingId}`,
+        {
+          headers: {
+            Authorization: "Bearer " + cookies.User,
+          },
+        }
+      );
+      trigger([
+        `https://wdev2.be/roel21/eindwerk/api/berichts.json?eventBericht.id=${eventId}`,
+        cookies.User,
+      ]);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <div>
       <Box
@@ -28,6 +65,20 @@ function Opmerking({ text, userName, userFirstName, createdAt }) {
             __html: text,
           }}
         ></Box>
+        {String(decodedEmail.username) == String(userEmail) && (
+          <Text
+            marginLeft="auto"
+            width="120px"
+            fontSize="12px"
+            color="red"
+            textDecoration="underline"
+            fontWeight="bold"
+            cursor="pointer"
+            onClick={handleReactionDelete}
+          >
+            Verwijder dit bericht
+          </Text>
+        )}
         {/* <Text
                     marginLeft="auto"
                     width="90px"

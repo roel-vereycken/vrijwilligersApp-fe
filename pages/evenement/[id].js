@@ -1,6 +1,7 @@
 import React from "react";
 import axios from "axios";
 import nookies from "nookies";
+import { useRouter } from "next/router";
 
 import {
   Box,
@@ -18,6 +19,7 @@ import BerichtBox from "../../components/BerichtBox";
 import Moment from "react-moment";
 
 export default function evenementDetail({ serverData }) {
+  const router = useRouter();
   return (
     <div>
       <Flex>
@@ -36,16 +38,22 @@ export default function evenementDetail({ serverData }) {
         >
           <Box display={["block", "block", "block", "none"]}>
             <ResponsiveNavbar />
-            <Text marginBottom="20px" marginLeft="50px">
+            <Text
+              marginBottom="20px"
+              marginLeft={["10px", "10px", "50px"]}
+              textDecoration="underline"
+              cursor="pointer"
+              onClick={() => router.back()}
+            >
               Terug naar overzicht
             </Text>
           </Box>
-          <Box marginX="50px" paddingBottom="15px">
+          <Box marginX={["10px", "10px", "50px"]} paddingBottom="15px">
             <Flex direction={["column", "column", "column", "row"]}>
               <Image
                 borderRadius="7"
-                width={["100%", "366px", "100%", "550px"]}
-                height={["140px", "173px", "320px", "260px"]}
+                width={["366px", "366px", "600px", "550px"]}
+                height={["190px", "190px", "320px", "260px"]}
                 //src={`https://localhost/vrijwilligersApp/public/images/afbeeldingen/${serverData.afbeelding}`}
                 src={`https://wdev2.be/roel21/eindwerk/images/image.php/${serverData.afbeelding}?image=/roel21/eindwerk/images/afbeeldingen/${serverData.afbeelding}`}
                 fallbackSrc="https://wdev2.be/roel21/eindwerk/images/image.php/theater.jpg?image=/roel21/eindwerk/images/afbeeldingen/theater.jpg"
@@ -53,8 +61,8 @@ export default function evenementDetail({ serverData }) {
 
               <Box
                 marginTop={["20px"]}
-                marginLeft={["-40px", "-33px", "5px", "40px"]}
-                width={["120%", "110%", "100%", "40%"]}
+                width={["100%", "100%", "100%", "40%"]}
+                marginLeft={[0, 0, 0, "20px"]}
               >
                 <List fontSize="1.25rem">
                   <ListItem>

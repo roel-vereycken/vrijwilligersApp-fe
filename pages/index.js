@@ -75,9 +75,7 @@ export default function login() {
                 </FormControl>
 
                 {error && (
-                  <Text marginLeft="50px" color="red">
-                    Uw inloggevens zijn incorrect
-                  </Text>
+                  <Text color="red">Uw inloggevens zijn incorrect</Text>
                 )}
 
                 <Button

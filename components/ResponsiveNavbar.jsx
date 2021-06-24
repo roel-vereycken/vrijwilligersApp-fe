@@ -1,6 +1,8 @@
 import React from "react";
 import { useDisclosure } from "@chakra-ui/react";
+import { useRouter } from "next/router";
 import Link from "next/link";
+import cookie from "js-cookie";
 
 import {
   Box,
@@ -25,8 +27,18 @@ import { FaUser, FaCalendar, FaCheck, FaInfo } from "react-icons/fa";
 import { FiLogOut } from "react-icons/fi";
 
 function ResponsiveNavbar({ page }) {
+  const router = useRouter();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const btnRef = React.useRef();
+
+  const handleLogOut = (e) => {
+    e.preventDefault();
+
+    cookie.remove("User");
+    cookie.remove("Id");
+
+    router.push("/");
+  };
   return (
     <>
       <Box
@@ -95,7 +107,7 @@ function ResponsiveNavbar({ page }) {
               </ListItem>
 
               <ListItem>
-                <Link href="/evenementen/1">
+                <Link href="/evenementen/1/asc">
                   <a>
                     <Flex>
                       <Icon
@@ -162,7 +174,9 @@ function ResponsiveNavbar({ page }) {
                   marginTop="9px"
                   marginX="10px"
                 />
-                <Text fontSize="2xl">Log uit</Text>
+                <Text fontSize="2xl" cursor="pointer" onClick={handleLogOut}>
+                  Log uit
+                </Text>
               </Flex>
             </Box>
           </DrawerFooter>

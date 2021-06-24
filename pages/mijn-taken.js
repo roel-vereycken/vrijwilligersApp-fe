@@ -2,6 +2,7 @@ import React from "react";
 import axios from "axios";
 import { Box, Flex } from "@chakra-ui/react";
 import nookies from "nookies";
+import Link from "next/link";
 
 import Navbar from "../components/Navbar";
 import Searchbar from "../components/Searchbar";
@@ -37,17 +38,22 @@ export default function mijnTaken({ data }) {
                 <th>Categorie</th>
                 <th>Datum</th>
               </tr>
+
               {data &&
-                data.taakverdeling.map((taak) => (
-                  <tr key={taak.id}>
-                    <td>{taak.eventId.naam}</td>
-                    <td>{taak.taakId.naam}</td>
-                    <td>{taak.eventId.eventCategorie.naam}</td>
-                    <td>
-                      <Moment format="DD/MM/YYYY">{taak.datum}</Moment>
-                    </td>
-                  </tr>
-                ))}
+                data.taakverdeling
+                  .sort((a, b) => (a.datum > b.datum ? 1 : -1))
+                  .map((taak) => (
+                    <Link href={`/evenement/${taak.eventId.id}`}>
+                      <tr key={taak.id}>
+                        <td>{taak.eventId.naam}</td>
+                        <td>{taak.taakId.naam}</td>
+                        <td>{taak.eventId.eventCategorie.naam}</td>
+                        <td>
+                          <Moment format="DD/MM/YYYY">{taak.datum}</Moment>
+                        </td>
+                      </tr>
+                    </Link>
+                  ))}
             </table>
           </Box>
         </Box>
