@@ -11,6 +11,7 @@ import {
 } from "@chakra-ui/react";
 import { trigger } from "swr";
 import { parseCookies } from "nookies";
+import Moment from "react-moment";
 
 const cookies = parseCookies();
 
@@ -28,24 +29,25 @@ function TaakBevestiging({ taak, eventId }) {
 
     const putRequestIRI = [];
     restoreUsers.map((user) => putRequestIRI.push(user["@id"]));
-
-    const resp = await axios.put(
-      `https://wdev2.be/roel21/eindwerk/api/event_taaks/${taak.id}`,
-      {
-        users: putRequestIRI,
-      },
-      {
-        headers: {
-          Authorization: "Bearer " + cookies.User,
+    try {
+      const resp = await axios.put(
+        `https://wdev2.be/roel21/eindwerk/api/event_taaks/${taak.id}`,
+        {
+          users: putRequestIRI,
         },
-      }
-    );
-    trigger([
-      `https://wdev2.be/roel21/eindwerk/api/event_taaks.jsonld?eventId.id=${eventId}`,
-      cookies.User,
-    ]);
-    console.log("klik");
-    console.log(resp);
+        {
+          headers: {
+            Authorization: "Bearer " + cookies.User,
+          },
+        }
+      );
+      trigger([
+        `https://wdev2.be/roel21/eindwerk/api/event_taaks.jsonld?eventId.id=${eventId}`,
+        cookies.User,
+      ]);
+    } catch (error) {
+      console.log(error);
+    }
   };
   return (
     <div>
@@ -55,14 +57,36 @@ function TaakBevestiging({ taak, eventId }) {
         marginBottom="10px"
         paddingX="5px"
       >
-        <Text>Je koos voor: {taak.taakId && taak.taakId.naam}</Text>
+        <Flex>
+          <Text fontWeight="bold" marginRight="5px">
+            Je koos voor:
+          </Text>
+          <Text>{taak.taakId && taak.taakId.naam}</Text>
+        </Flex>
+
         <List borderBottom="1px solid black" paddingBottom="10px">
-          <ListItem>Uur star: {taak.startUur}</ListItem>
-          <ListItem>Uur stop: {taak.eindUur}</ListItem>
+          <ListItem>
+            <Flex>
+              <Text fontWeight="bold" marginRight="5px">
+                Uur start:
+              </Text>
+              <Moment format="HH:mm">{taak.startUur}</Moment>
+            </Flex>
+          </ListItem>
+          <ListItem>
+            <Flex>
+              <Text fontWeight="bold" marginRight="7px">
+                Uur stop:
+              </Text>
+              <Moment format="HH:mm">{taak.eindUur}</Moment>
+            </Flex>{" "}
+          </ListItem>
         </List>
         <Flex borderBottom="1px solid black" paddingBottom="10px">
-          <Text>Hebben zich aangemeld:</Text>
-          <Box marginLeft="10px">
+          <Text fontWeight="bold" marginRight="5px">
+            Hebben zich aangemeld:
+          </Text>
+          <Box marginLeft="5px">
             <OrderedList>
               {taak.users &&
                 taak.users.map((user) => (
@@ -74,7 +98,9 @@ function TaakBevestiging({ taak, eventId }) {
           </Box>
         </Flex>
         <Flex>
-          <Text>Omschrijving:</Text>
+          <Text fontWeight="bold" marginRight="5px">
+            Omschrijving:
+          </Text>
           {/* warning dangerouslySetInnerHTML: Alleen de admin kan 
                     omschrijving toevoegen in easyadmin */}
           <Box
@@ -84,6 +110,7 @@ function TaakBevestiging({ taak, eventId }) {
             }
           ></Box>
         </Flex>
+
         <Button
           marginY="10px"
           width="100%"

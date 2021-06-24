@@ -28,6 +28,7 @@
     "react-icons": "^4.2.0",
     "react-moment": "^1.1.1",
     "sass": "^1.34.1",
+    "sweetalert": "^2.1.2",
     "swr": "^0.5.6"
   }
 }

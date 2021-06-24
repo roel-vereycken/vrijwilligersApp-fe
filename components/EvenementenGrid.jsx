@@ -13,10 +13,9 @@ function EvenementenGrid({ data }) {
   //console.log(data);
   return (
     <>
-      <Box width="100%">
+      <Box width="100%" marginBottom="70px">
         <Center>
           <SimpleGrid
-            height="75%"
             marginTop="25px"
             columns={[0, 0, 2, 2, 3]}
             spacingX="50px"
@@ -29,13 +28,13 @@ function EvenementenGrid({ data }) {
                     <Box
                       bg="gray.50"
                       height={["195px", "250px"]}
-                      width={["250px", "340px", "340px", "340px"]}
+                      width={["270px", "340px", "340px", "340px"]}
                       borderRadius="7"
                       border="2px solid grey"
                       boxShadow="xl"
                     >
                       <Image
-                        borderTopRadius="7"
+                        borderTopRadius="5"
                         width="100%"
                         height={["120px", "175px"]}
                         //src={`https://localhost/vrijwilligersApp/public/images/image.php/${evenement.afbeelding}?width=425&height=170&cropratio=425:170&image=/vrijwilligersApp/public/images/afbeeldingen/${evenement.afbeelding}`}

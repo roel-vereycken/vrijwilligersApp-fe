@@ -1,6 +1,6 @@
 import { ChakraProvider } from "@chakra-ui/react";
 import axios from "axios";
-import "../styles/globals.css";
+import "../styles/globals.scss";
 import "../styles/table.scss";
 import "../styles/dropdown.scss";
 

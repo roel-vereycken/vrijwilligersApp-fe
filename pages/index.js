@@ -43,49 +43,56 @@ export default function login() {
 
   return (
     <Box bgColor="gray.200" minHeight="100vh">
-      <form onSubmit={handleLogin}>
-        <Heading marginLeft="23%" paddingTop="10%" paddingBottom="10px">
-          Log in
-        </Heading>
-        <Center>
-          <Flex direction="column" bgColor="gray.200" width="60%">
-            <FormControl className="profileTextField">
-              <FormLabel>Email</FormLabel>
-              <input
-                className="profileInput"
-                type="text"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-              />
-            </FormControl>
-            <FormControl className="profileTextField">
-              <FormLabel>Wachtwoord</FormLabel>
-              <input
-                className="profileInput"
-                type="password"
-                value={wachtwoord}
-                onChange={(e) => setWachtwoord(e.target.value)}
-              />
-            </FormControl>
+      <Center>
+        <Flex
+          direction="column"
+          width={["100%", "70%"]}
+          paddingLeft={["15%", "10%"]}
+        >
+          <Heading paddingTop="10%" paddingBottom="10px">
+            Log in
+          </Heading>
+          <Box>
+            <Flex direction="column" bgColor="gray.200">
+              <form onSubmit={handleLogin}>
+                <FormControl>
+                  <FormLabel>Email</FormLabel>
+                  <input
+                    className="profileInput"
+                    type="text"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                  />
+                </FormControl>
+                <FormControl>
+                  <FormLabel>Wachtwoord</FormLabel>
+                  <input
+                    className="profileInput"
+                    type="password"
+                    value={wachtwoord}
+                    onChange={(e) => setWachtwoord(e.target.value)}
+                  />
+                </FormControl>
 
-            {error && (
-              <Text marginLeft="50px" color="red">
-                Uw inloggevens zijn incorrect
-              </Text>
-            )}
+                {error && (
+                  <Text marginLeft="50px" color="red">
+                    Uw inloggevens zijn incorrect
+                  </Text>
+                )}
 
-            <Button
-              width="140px"
-              marginLeft="50px"
-              colorScheme="teal"
-              marginTop="20px"
-              type="submit"
-            >
-              Meld je aan
-            </Button>
-          </Flex>
-        </Center>
-      </form>
+                <Button
+                  width="140px"
+                  colorScheme="teal"
+                  marginTop="20px"
+                  type="submit"
+                >
+                  Meld je aan
+                </Button>
+              </form>
+            </Flex>
+          </Box>
+        </Flex>
+      </Center>
     </Box>
   );
 }

@@ -34,7 +34,8 @@ function TakenBox() {
       cookies.User,
     ],
 
-    fetcher
+    fetcher,
+    { refreshInterval: 10000 }
   );
   useEffect(() => {
     /**

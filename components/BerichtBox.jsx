@@ -30,7 +30,8 @@ function BerichtBox() {
       `https://wdev2.be/roel21/eindwerk/api/berichts.json?eventBericht.id=${id}`,
       cookies.User,
     ],
-    fetcher
+    fetcher,
+    { refreshInterval: 30000 }
   );
   /* Handler om een bericht te versturen */
   const handleMessageSubmit = async (e) => {
@@ -96,6 +97,7 @@ function BerichtBox() {
               text={bericht.body}
               userName={bericht.userBericht.naam}
               userFirstName={bericht.userBericht.voornaam}
+              userEmail={bericht.userBericht.email}
               comments={bericht.opmerkingen}
               createdAt={bericht.createdAt}
             />
