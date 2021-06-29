@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import { useRouter } from "next/router";
 import { parseCookies } from "nookies";
+import swal from "sweetalert";
 
 import {
   Box,
@@ -42,8 +43,10 @@ export default function nieuwWachtwoord() {
           }
         );
         console.log(resp);
+        swal("Opgeslagen", "Je wachtwoord is aangepast", "success");
       } catch (error) {
         console.log(error);
+        swal("Error", "Er ging iets mis", "error");
       }
     } else {
       setError(true);
